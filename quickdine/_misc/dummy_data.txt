@@ -1,0 +1,10 @@
+1	Mamma's	Multi-cuisine	Non-veg	no	An upscale casual restaurant providing a relaxed yet refined dining experience, specializing in a fusion of Indian and Continental dishes with an emphasis on fresh ingredients and elegant presentation.
+2	MaxFun	Multi-cuisine	Non-veg	no	A vibrant and lively casual dining spot, popular among youth and families, known for its diverse menu featuring fast food, quick bites, and fun, customizable dishes.
+3	Dine Inn Kasa	Multi-cuisine	Non-veg	no	An upscale casual restaurant providing a relaxed yet refined dining experience, specializing in a fusion of Indian and Middle-eastern dishes with an emphasis on fresh ingredients and elegant presentation.
+4	Arabian Palace	Middle Eastern	Non-veg	yes	An authentic Middle Eastern restaurant renowned for its succulent grilled meats, aromatic biryanis, traditional mandi, and a wide array of Arabic appetizers, providing a rich culinary journey.
+5	Farha	South Indian	Non-veg	yes	A local favorite known for its simple yet delicious and affordable snacks and biriyanis.
+6	Maggie Bakery & Restaurant	South Indian	Non-veg	no	A charming local spot that combines a popular bakery with a casual restaurant, offering a range of fresh baked goods, snacks, and popular Indian comfort food dishes, often including quick meals.
+7	Portico	Multi-cuisine	Non-veg	no	A sophisticated and modern open air restaurant, offering a curated menu of international or contemporary Indian cuisine in an elegant setting.
+8	Dadwi Cafe	South Indian	Veg	-	A trendy and relaxed cafe, perfect for a casual hangout, serving a variety of coffees, teas, light snacks, sandwiches, and perhaps some baked goods, with a cozy ambiance.
+9	Kubaba	Middle Eastern	Non-veg	yes	A distinctive restaurant specializing in authentic Mediterranean and Middle Eastern cuisine, with a focus on Levantine dishes like kebabs, hummus, falafel, and other aromatic preparations.
+10	Saravana Bhavan	South Indian	Veg	-	A globally recognized vegetarian restaurant chain, famous for its extensive menu of authentic South Indian vegetarian dishes, especially various types of dosas, idlis, vadas, and traditional thalis.
