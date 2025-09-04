@@ -1,5 +1,29 @@
 .card-comp{
-    background-color: white;
-    height:200px;
-    width: 200px;
+    background-color: rgb(253, 244, 233);
+    height:210px;
+    width: 240px;
+    border-radius: 10px;
+}
+.card-comp:hover{
+    cursor:default;
+    transform: scale(1.1);
+    border: solid;
+    border-width: 1px;
+    border-color: rgb(183, 182, 182);
+}
+
+.card-heading{
+    font-size: 20px;
+    font-weight: bold;
+    margin: 10px 0px;
+    text-align: center;
+    padding: 10px 10px;
+    font-family: "Montserrat", sans-serif;
+}
+.card-body{
+    font-size: 15px;
+    color: gray;
+    text-align: center;
+    padding: 10px 10px;
+    font-family: 'Julius Sans One', sans-serif;
 }

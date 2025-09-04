@@ -31,8 +31,8 @@ function Home() {
       </div>
       <div className='body-section'>
         <div className="tagline">
-          <strong>Where u eat and enjoy</strong><br></br>
-          <i>Go and sleep</i>
+          <h2>Dine Smarter, Reserve Faster.</h2>
+          <i>Easily discover restaurants and reserve your table in just a few clicks.</i>
         </div>
         <div className="pplimg">
           <img

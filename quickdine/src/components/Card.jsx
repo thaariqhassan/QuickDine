@@ -5,10 +5,10 @@ function Card({props}) {
   return (
     <div className='card-comp'>
     <div className='card-heading'>
-      {props.heading}
+        {props.heading}
     </div>
     <div className="card-body">
-    {props.content}
+        {props.content}
     </div>
     </div>
     
