@@ -4,9 +4,10 @@ body{
     font-family: "Poppins", sans-serif;
 }
 .red-box{
-    display: inline-block;
-    width: 100%;
-    height: 50vh;
+    display: flex;
+    flex-direction: column;  /* stack header + body-section */
+    padding: 20px;
+    padding-bottom: 30px;
     background-color: rgb(176, 55, 55);
 }
 
@@ -26,7 +27,7 @@ body{
 .mid-navbar{
     display: flex;
     justify-content: space-between;
-    gap: 50px;
+    /*column-gap: 30px;*/
     color: white;
     font-size: 17px;
 }
@@ -59,21 +60,29 @@ body{
 
 .body-section{
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-evenly; /* tagline left, image right */
     align-items: center;
-    margin-top: 50px;
+    gap: 20px;
+    flex-wrap: wrap; /* responsive on smaller screens */
+    margin-top: 35px;
 }
 .tagline{
     color: white;
 }
 .imageppl{
-    height: 200px;
-    width: 500px;
-    border-radius: 60px;
+    height: 250px;
+    width: 400px;
+    border-radius: 10px;
+}
+.pplimg{
+    object-fit: cover;
+    
 }
 
 .lower-layer{
     display: flex;
-    justify-content: space-evenly;
+    flex-wrap: wrap;
+    gap: 100px;
+    justify-content: center;
     margin-top: 35px;
 }

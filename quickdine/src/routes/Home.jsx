@@ -1,7 +1,10 @@
 import React from 'react'
+import { useNavigate } from 'react-router'
 import "../routeStyles/Home.css"
+import restaurantimage from "../assets/images/restaurant.jpg"
 import Card from '../components/Card'
-function Home() {
+function Home(){
+  const navigate = useNavigate();
   const features = [
     {
       heading : "Explore Restaurants",
@@ -23,7 +26,7 @@ function Home() {
         <div className='logo'>QUICKDINE</div>
         <div className='mid-navbar'>
           <div className='nav-btn'>Home</div>
-          <div className='nav-btn'>Restaurants</div>
+          <div className='nav-btn' onClick={() => navigate("/restaurants")}>Restaurants</div>
           <div className='nav-btn'>About us</div>
           <div className='nav-btn'>Blog</div>
         </div>
@@ -36,7 +39,7 @@ function Home() {
         </div>
         <div className="pplimg">
           <img
-          src='https://www.impruvellc.com/wp-content/uploads/2023/07/Relaxed-Decor-Casual-Dress-Code-800x379.jpg'
+          src={restaurantimage}
           className='imageppl'></img>
         </div>
       </div>
