@@ -1,6 +1,7 @@
 body{
     margin: 0;
     background-color: antiquewhite;
+    font-family: 'poppins';
 }
 .red-box{
     display: inline-block;
@@ -13,10 +14,15 @@ body{
     display: flex;
     width: 100%;
     height: fit-content;
+    align-items: center;
     justify-content: space-evenly;
     margin-top: 20px;
 }
-
+.logo{
+    font-family: 'Julius Sans One', sans-serif;
+    color: white;
+    font-size: 20px;
+}
 .mid-navbar{
     display: flex;
     justify-content: space-between;
@@ -25,8 +31,30 @@ body{
     font-size: 17px;
 }
 .nav-btn{
+    display: flex;
     cursor: pointer;
     border-radius: 20px;
+    padding: 5px 15px;
+    height: 30px;
+    justify-content: center;
+    align-items: center;
+}
+.nav-btn:hover{
+    cursor: pointer;
+    border-radius: 20px;
+    background-color: rgb(200, 69, 69);;
+}
+
+.act-btn{
+    padding: 10px 27px;
+    color: rgb(176, 55, 55);
+    background-color: white;
+    border-radius: 30px;
+    font-weight: 600;
+}
+.act-btn:hover{
+    cursor: pointer;
+    transform: scale(1.1);
 }
 
 .body-section{
