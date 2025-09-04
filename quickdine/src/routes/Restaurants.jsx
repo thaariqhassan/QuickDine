@@ -33,6 +33,43 @@ import CardMedia from '@mui/material/CardMedia';
 function Restaurants(){
   const navigate = useNavigate();
 
+  // States
+  // Filters
+  const [filters, setFilter] = React.useState("price-lh");
+  const handleFilters = (event, newFilter)=> {
+    setFilter(newFilter);
+  };
+
+  // Price
+  const [priceValue, setPriceValue] = React.useState([0, 1000]);
+  const handlePriceValue = (event, newPriceValue) => {
+    setPriceValue(newPriceValue);
+  };
+
+  // Distance
+  const [distanceValue, setDistanceValue] = React.useState([0, 100]);
+  const handleDistanceValue = (event, newDistanceValue) => {
+    setDistanceValue(newDistanceValue);
+  };
+
+  // Food types
+  const [foodtypes, setFoodtype] = React.useState(() => ["veg", "nonveg"]);
+  const handleFoodtype = (event, newFoodtypes)=> {
+    setFoodtype(newFoodtypes);
+  };
+
+  // Halal
+  const [halal, setHalal] = React.useState(() => ["yes", "no"]);
+  const handleHalal = (event, newHalal)=> {
+    setHalal(newHalal);
+  };
+
+  // Cuisine
+  const [cuisines, setCuisine] = React.useState(() => ["chinese", "multi-cuisine", "middle-eastern", "north-indian", "south-indian"]);
+  const handleCuisine = (event, newCuisine)=> {
+    setCuisine(newCuisine);
+  };
+
   // Dummy data
   const restaurants = [
     {
@@ -149,12 +186,21 @@ function Restaurants(){
         <Typography variant="h6">
           Price
         </Typography>
-        <Slider/>
+        <Slider
+          value={priceValue}
+          onChange={handlePriceValue}
+          valueLabelDisplay="auto"
+          max={1000}
+        />
 
         <Typography variant="h6">
           Distance
         </Typography>
-        <Slider/>
+        <Slider
+          value={distanceValue}
+          onChange={handleDistanceValue}
+          valueLabelDisplay="auto"
+        />
 
         <Typography variant="h6">
           Rating
@@ -165,14 +211,18 @@ function Restaurants(){
         <Typography variant="h6">
           Type
         </Typography>
-        <ToggleButtonGroup sx={{
-          display: "flex",
-          flexWrap: "wrap"
-        }}>
-          <ToggleButton>
+        <ToggleButtonGroup
+          value={foodtypes}
+          onChange={handleFoodtype}
+          sx={{
+            display: "flex",
+            flexWrap: "wrap"
+          }}
+        >
+          <ToggleButton value="veg">
             Veg
           </ToggleButton>
-          <ToggleButton>
+          <ToggleButton value="nonveg">
             Non-veg
           </ToggleButton>
         </ToggleButtonGroup>
@@ -180,14 +230,17 @@ function Restaurants(){
         <Typography variant="h6">
           Halal
         </Typography>
-        <ToggleButtonGroup sx={{
+        <ToggleButtonGroup
+          value={halal}
+          onChange={handleHalal}
+          sx={{
           display: "flex",
           flexWrap: "wrap"
         }}>
-          <ToggleButton>
+          <ToggleButton value="yes">
             Yes
           </ToggleButton>
-          <ToggleButton>
+          <ToggleButton value="no">
             No
           </ToggleButton>
         </ToggleButtonGroup>
@@ -195,23 +248,26 @@ function Restaurants(){
         <Typography variant="h6">
           Cuisine
         </Typography>
-        <ToggleButtonGroup sx={{
+        <ToggleButtonGroup
+          value={cuisines}
+          onChange={handleCuisine}
+          sx={{
           display: "flex",
           flexWrap: "wrap"
         }}>
-          <ToggleButton>
+          <ToggleButton value="chinese">
             Chinese
           </ToggleButton>
-          <ToggleButton>
+          <ToggleButton value="multi-cuisine">
             Multi-cuisine
           </ToggleButton>
-          <ToggleButton>
+          <ToggleButton value="middle-eastern">
             Middle Eastern
           </ToggleButton>
-          <ToggleButton>
+          <ToggleButton value="north-indian">
             North Indian
           </ToggleButton>
-          <ToggleButton>
+          <ToggleButton value="south-indian">
             South Indian
           </ToggleButton>
         </ToggleButtonGroup>
@@ -219,6 +275,39 @@ function Restaurants(){
 
       <div className='restaurant-body-content'>
         {
+          <Box>
+          <Box
+            sx={{
+              display: "flex",
+              flexWrap: "wrap",
+              alignItems: "center",
+            }}
+          >
+            <Typography>
+              Sort by
+            </Typography>
+            <ToggleButtonGroup
+              value={filters}
+              exclusive
+              onChange={handleFilters}
+              sx={{
+              display: "flex",
+              flexWrap: "wrap"
+            }}>
+              <ToggleButton value="price-hl">
+                Price: High to low
+              </ToggleButton>
+              <ToggleButton value="price-lh">
+                Price: Low to high
+              </ToggleButton>
+              <ToggleButton value="distance">
+                Distance
+              </ToggleButton>
+              <ToggleButton value="rating">
+                Rating
+              </ToggleButton>
+            </ToggleButtonGroup>
+          </Box>
           <Grid container spacing={4} justifyContent="center">
           {
             restaurants.map((restaurant,index) =>{
@@ -246,6 +335,7 @@ function Restaurants(){
               )})
           }
           </Grid>
+          </Box>
         }
       </div>
     </div>
