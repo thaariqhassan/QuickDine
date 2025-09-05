@@ -174,167 +174,207 @@ function Restaurants(){
         <Typography variant="h6">
           Filters
         </Typography>
-        <Box sx={{
-          display: "flex",
-          flexDirection: "row",
-          gap: 1
-        }}>
-          <Button variant="outlined">Apply</Button>
-          <Button variant="outlined">Reset</Button>
-        </Box>
-
-        <Typography variant="h6">
-          Price
-        </Typography>
-        <Slider
-          value={priceValue}
-          onChange={handlePriceValue}
-          valueLabelDisplay="auto"
-          max={1000}
-        />
-
-        <Typography variant="h6">
-          Distance
-        </Typography>
-        <Slider
-          value={distanceValue}
-          onChange={handleDistanceValue}
-          valueLabelDisplay="auto"
-        />
-
-        <Typography variant="h6">
-          Rating
-        </Typography>
-        <Rating>
-        </Rating>
-
-        <Typography variant="h6">
-          Type
-        </Typography>
-        <ToggleButtonGroup
-          value={foodtypes}
-          onChange={handleFoodtype}
-          sx={{
-            display: "flex",
-            flexWrap: "wrap"
-          }}
-        >
-          <ToggleButton value="veg">
-            Veg
-          </ToggleButton>
-          <ToggleButton value="nonveg">
-            Non-veg
-          </ToggleButton>
-        </ToggleButtonGroup>
-
-        <Typography variant="h6">
-          Halal
-        </Typography>
-        <ToggleButtonGroup
-          value={halal}
-          onChange={handleHalal}
-          sx={{
-          display: "flex",
-          flexWrap: "wrap"
-        }}>
-          <ToggleButton value="yes">
-            Yes
-          </ToggleButton>
-          <ToggleButton value="no">
-            No
-          </ToggleButton>
-        </ToggleButtonGroup>
-
-        <Typography variant="h6">
-          Cuisine
-        </Typography>
-        <ToggleButtonGroup
-          value={cuisines}
-          onChange={handleCuisine}
-          sx={{
-          display: "flex",
-          flexWrap: "wrap"
-        }}>
-          <ToggleButton value="chinese">
-            Chinese
-          </ToggleButton>
-          <ToggleButton value="multi-cuisine">
-            Multi-cuisine
-          </ToggleButton>
-          <ToggleButton value="middle-eastern">
-            Middle Eastern
-          </ToggleButton>
-          <ToggleButton value="north-indian">
-            North Indian
-          </ToggleButton>
-          <ToggleButton value="south-indian">
-            South Indian
-          </ToggleButton>
-        </ToggleButtonGroup>
-      </div>
-
-      <div className='restaurant-body-content'>
-        {
-          <Box>
-          <Box
+        <Box className='restuarant-body-sidebar-box'
             sx={{
               display: "flex",
-              flexWrap: "wrap",
-              alignItems: "center",
+              flexDirection: "row",
+              gap: 1
             }}
           >
+            <Button variant="outlined">Apply</Button>
+            <Button variant="outlined">Reset</Button>
+        </Box>
+
+        <Box className='restaurant-body-sidebar-scrollable'>
+          <Box className='restuarant-body-sidebar-box'>
+            <Typography variant="h6">
+              Price
+            </Typography>
+            <Slider
+              value={priceValue}
+              onChange={handlePriceValue}
+              valueLabelDisplay="auto"
+              max={1000}
+            />
             <Typography>
-              Sort by
+              Max price: ₹{priceValue[1]}
+            </Typography>
+            <Typography>
+              Min price: ₹{priceValue[0]}
+            </Typography>
+          </Box>
+
+          <Box className='restuarant-body-sidebar-box'>
+            <Typography variant="h6">
+              Distance
+            </Typography>
+            <Slider
+              value={distanceValue}
+              onChange={handleDistanceValue}
+              valueLabelDisplay="auto"
+            />
+            <Typography>
+              Max distance: {distanceValue[1]} km
+            </Typography>
+            <Typography>
+              Min distance: {distanceValue[0]} km
+            </Typography>
+          </Box>
+
+          <Box className='restuarant-body-sidebar-box'>
+            <Typography variant="h6">
+              Rating
+            </Typography>
+            <Rating>
+            </Rating>
+          </Box>
+
+          <Box className='restuarant-body-sidebar-box'>
+            <Typography variant="h6">
+              Type
             </Typography>
             <ToggleButtonGroup
-              value={filters}
-              exclusive
-              onChange={handleFilters}
+              className='restuarant-body-sidebar-buttongroup'
+              value={foodtypes}
+              onChange={handleFoodtype}
+              sx={{
+                display: "flex",
+                flexWrap: "wrap"
+              }}
+            >
+              <ToggleButton value="veg">
+                Veg
+              </ToggleButton>
+              <ToggleButton value="nonveg">
+                Non-veg
+              </ToggleButton>
+            </ToggleButtonGroup>
+          </Box>
+
+          <Box className='restuarant-body-sidebar-box'>
+            <Typography variant="h6">
+              Halal
+            </Typography>
+            <ToggleButtonGroup
+              className='restuarant-body-sidebar-buttongroup'
+              value={halal}
+              onChange={handleHalal}
               sx={{
               display: "flex",
               flexWrap: "wrap"
             }}>
-              <ToggleButton value="price-hl">
-                Price: High to low
+              <ToggleButton value="yes">
+                Yes
               </ToggleButton>
-              <ToggleButton value="price-lh">
-                Price: Low to high
-              </ToggleButton>
-              <ToggleButton value="distance">
-                Distance
-              </ToggleButton>
-              <ToggleButton value="rating">
-                Rating
+              <ToggleButton value="no">
+                No
               </ToggleButton>
             </ToggleButtonGroup>
           </Box>
-          <Grid container spacing={4} justifyContent="center">
-          {
-            restaurants.map((restaurant,index) =>{
-              return(
-                <Grid item key={restaurant.rid}>
-                  <Card style={{width:"100%"}} key={index} sx={{maxWidth: 300}}>
-                    <CardContent>
-                      <CardMedia component="img" height="150" image={restaurantimage} alt="Restaurant Image">
-                      </CardMedia>
-                    </CardContent>
-                    <CardContent>
-                      <Typography variant="h6">
-                        {restaurant.name}
-                      </Typography>
-                    </CardContent>
-                    <CardActions>
-                      <Chip label={restaurant.cuisine}/>
-                      <Chip label={restaurant.type}/>
-                      {
-                        (restaurant.halal==="yes" && <Chip label="Halal"/>)
-                      }
-                    </CardActions>
-                  </Card>
-                </Grid>
-              )})
-          }
-          </Grid>
+
+          <Box className='restuarant-body-sidebar-box'>
+            <Typography variant="h6">
+              Cuisine
+            </Typography>
+            <ToggleButtonGroup
+              className='restuarant-body-sidebar-buttongroup'
+              value={cuisines}
+              onChange={handleCuisine}
+              sx={{
+              display: "flex",
+              flexWrap: "wrap"
+            }}>
+              <ToggleButton value="chinese">
+                Chinese
+              </ToggleButton>
+              <ToggleButton value="multi-cuisine">
+                Multi-cuisine
+              </ToggleButton>
+              <ToggleButton value="middle-eastern">
+                Middle Eastern
+              </ToggleButton>
+              <ToggleButton value="north-indian">
+                North Indian
+              </ToggleButton>
+              <ToggleButton value="south-indian">
+                South Indian
+              </ToggleButton>
+            </ToggleButtonGroup>
+          </Box>
+        </Box>
+      </div>
+
+      <div>
+        {
+          <Box className='restaurant-body-content'>
+            <Box
+              sx={{
+                display: "flex",
+                flexWrap: "wrap",
+                alignItems: "center",
+              }}
+            >
+              <Typography
+                sx={{
+                  paddingRight: "20px",
+                  textAlign: "center"
+                }}
+              >
+                Sort by
+              </Typography>
+              <ToggleButtonGroup
+                className='restuarant-body-sidebar-buttongroup'
+                value={filters}
+                exclusive
+                onChange={handleFilters}
+                sx={{
+                  display: "flex",
+                }}
+              >
+                <ToggleButton value="price-hl">
+                  Price: High to low
+                </ToggleButton>
+                <ToggleButton value="price-lh">
+                  Price: Low to high
+                </ToggleButton>
+                <ToggleButton value="distance">
+                  Distance
+                </ToggleButton>
+                <ToggleButton value="rating">
+                  Rating
+                </ToggleButton>
+              </ToggleButtonGroup>
+            </Box>
+
+            <Box className='restaurant-body-content-main'>
+              <Grid container spacing={4} justifyContent="center">
+              {
+                restaurants.map((restaurant,index) =>{
+                  return(
+                    <Grid item key={restaurant.rid}>
+                      <Card style={{width:"100%"}} key={index} sx={{maxWidth: 300}}>
+                        <CardContent>
+                          <CardMedia component="img" height="150" image={restaurantimage} alt="Restaurant Image">
+                          </CardMedia>
+                        </CardContent>
+                        <CardContent>
+                          <Typography variant="h6">
+                            {restaurant.name}
+                          </Typography>
+                        </CardContent>
+                        <CardActions>
+                          <Chip label={restaurant.cuisine}/>
+                          <Chip label={restaurant.type}/>
+                          {
+                            (restaurant.halal==="yes" && <Chip label="Halal"/>)
+                          }
+                        </CardActions>
+                      </Card>
+                    </Grid>
+                  )})
+              }
+              </Grid>
+            </Box>
           </Box>
         }
       </div>
