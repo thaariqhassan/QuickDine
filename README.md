@@ -1,6 +1,6 @@
 # QuickDine
 
-Restuarant booking app
+Restaurant booking app
 
 ## Features
 
