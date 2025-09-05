@@ -1,0 +1,51 @@
+.restaurant-body
+{
+    display: flex;
+    padding: 10px;
+    height: 100%;
+}
+
+.restaurant-body-content{
+    flex-grow: 1;
+    padding: 5px;
+}
+
+.restaurant-body-content-topbar{
+    flex-grow: 1;
+    padding: 10px;
+}
+
+.restaurant-body-content-main{
+    flex-grow: 1;
+    margin: 10px;
+    height: 80vh;
+    overflow-y: scroll;
+}
+
+.restaurant-body-sidebar
+{
+    /*height: 100%;*/
+    padding: 10px;
+
+    position: sticky;
+    position: -webkit-sticky;
+}
+
+.restaurant-body-sidebar-scrollable
+{
+    /*height: 100%;*/
+    padding: 10px;
+
+    height: 80vh;
+    overflow-y: scroll;
+}
+
+.restuarant-body-sidebar-box
+{
+    padding: 10px;
+}
+
+.restuarant-body-sidebar-buttongroup
+{
+    padding-top: 10px;
+}
