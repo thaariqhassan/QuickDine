@@ -4,12 +4,11 @@ import "../componentStyles/LoginCard.css"
 import { blue, green } from "@mui/material/colors";
 
 function LoginCard({className, showLoginCard, closeLoginCard}) {
-    console.log(`show login card value is ${showLoginCard}`);
     if (!showLoginCard) return null;
     
     const [users, setUsers] = useState([]);
     const [form, setForm] = useState({ name: "", email: "" });
-/*
+
    // Fetch all users
   useEffect(() => {
     axios.get("http://127.0.0.1:8000/users/")
@@ -29,17 +28,18 @@ function LoginCard({className, showLoginCard, closeLoginCard}) {
     } catch (err) {
       console.error(err);
     }
-  };*/
+  }
   //Handle input
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
   return (
+    <>
     <div className={className}>
       <h1>Log In</h1>
 
-      <form className="login-form" onSubmit={closeLoginCard}>
+      <form className="login-form" onSubmit={() =>{handleSubmit}}>
         <div>
             <label>Full Name</label>
             <input
@@ -64,8 +64,8 @@ function LoginCard({className, showLoginCard, closeLoginCard}) {
             />
         </div>
         <div className="login-btn-holder">
-            <button className="login-btn" type="submit" style={{backgroundColor: blue}} onClick={closeLoginCard}>Back</button>
-            <button className="login-btn" type="submit" style={{backgroundColor: green}} onClick={closeLoginCard}>Add User</button>
+            <button className="login-btn" type="reset" style={{backgroundColor: blue}} onClick={closeLoginCard}>Back</button>
+            <button className="login-btn" type="submit" style={{backgroundColor: green}} onClick={handleSubmit}>Add User</button>
         </div>
 
       </form>
@@ -76,6 +76,7 @@ function LoginCard({className, showLoginCard, closeLoginCard}) {
         ))}
       </ul>
     </div>
+    </>
   );
 }
 

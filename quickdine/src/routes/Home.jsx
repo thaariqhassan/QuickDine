@@ -33,9 +33,7 @@ function Home(){
           <div className='nav-btn'>About us</div>
           <div className='nav-btn'>Blog</div>
         </div>
-        <div className='act-btn' onClick={() => {setLoginClicked(true);
-          console.log("login clicked");
-        } }>Login</div>
+        <div className='act-btn' onClick={() => {setLoginClicked(true)}}>Login</div>
       </div>
       <div className='body-section'>
         <div className="tagline">
@@ -61,7 +59,7 @@ function Home(){
   <LoginCard
     className="login-card"
     showLoginCard={loginClicked}
-    closeLoginCard = {() => {setLoginClicked(false);console.log("Login closed");}}
+    closeLoginCard = {() => setLoginClicked(false)}
   />
   </>
   )

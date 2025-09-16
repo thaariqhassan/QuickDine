@@ -2,8 +2,8 @@ from fastapi import FastAPI, Depends
 from sqlalchemy.orm import Session
 from fastapi.middleware.cors import CORSMiddleware
 
-import backend.models as models, backend.schemas as schemas
-from backend.database import Base, engine, SessionLocal
+import models as models, schemas as schemas
+from database import Base, engine, SessionLocal
 
 # Create tables in SQLite
 Base.metadata.create_all(bind=engine)
@@ -13,7 +13,7 @@ app = FastAPI()
 # Allow React frontend to talk to backend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],  # React dev server
+    allow_origins=["http://localhost:5173"],  # React dev server
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
