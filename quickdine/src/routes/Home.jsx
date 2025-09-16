@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router'
 import "../routeStyles/Home.css"
 import restaurantimage from "../assets/images/restaurant.jpg"
 import Card from '../components/Card'
+import LoginCard from '../components/LoginCard'
 function Home(){
+  const [loginClicked,setLoginClicked] = useState(false);
   const navigate = useNavigate();
   const features = [
     {
@@ -20,7 +22,8 @@ function Home(){
     }
   ];
   return (
-    <>
+  <>
+  <div className='Outer-Home' style={loginClicked ? {opacity:'0.5', filter:'blur(20px)'} : null}>
     <div className = "red-box">
       <div className='header'>
         <div className='logo'>QUICKDINE</div>
@@ -30,7 +33,9 @@ function Home(){
           <div className='nav-btn'>About us</div>
           <div className='nav-btn'>Blog</div>
         </div>
-        <div className='act-btn'>Login</div>
+        <div className='act-btn' onClick={() => {setLoginClicked(true);
+          console.log("login clicked");
+        } }>Login</div>
       </div>
       <div className='body-section'>
         <div className="tagline">
@@ -52,7 +57,13 @@ function Home(){
         )})
       }
     </div>
-    </>
+  </div>
+  <LoginCard
+    className="login-card"
+    showLoginCard={loginClicked}
+    closeLoginCard = {() => {setLoginClicked(false);console.log("Login closed");}}
+  />
+  </>
   )
 }
 

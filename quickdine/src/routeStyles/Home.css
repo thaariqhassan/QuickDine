@@ -86,3 +86,25 @@ body{
     justify-content: center;
     margin-top: 35px;
 }
+
+.Outer-Home{
+    position : relative;
+    z-index: 1;
+}
+
+.login-card{
+    position: absolute;
+    z-index: 3;
+    border: solid;
+    border-width: 1px;
+    border-color: rgb(147, 145, 145);
+    top: 20%;
+    right: 33%;
+    background-color: white;
+    border-radius: 10px;
+    padding: 50px 50px;
+    
+    
+    
+    
+}

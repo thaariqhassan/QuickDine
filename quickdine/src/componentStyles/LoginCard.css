@@ -1,0 +1,35 @@
+.login-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 30px;
+    margin: 10px 10px;
+}
+
+.login-name{
+    display: flex;
+    width: 400px;
+    padding: 10px 10px;
+}
+
+.login-email{
+    display: flex;
+    width: 400px;
+    padding: 10px 10px;
+
+}
+
+.login-btn-holder{
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    
+    
+}
+.login-btn{
+    background-color: rgb(231, 233, 235);
+    width: 100px;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+}
