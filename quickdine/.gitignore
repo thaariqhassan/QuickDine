@@ -23,5 +23,8 @@ __pycache__/
 *.njsproj
 *.sln
 *.sw?
+<<<<<<< HEAD
 
 venv/
+=======
+>>>>>>> 32bc6d074663626b8a9eb3f274ef288907475eb4
