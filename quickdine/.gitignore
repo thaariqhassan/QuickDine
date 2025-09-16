@@ -24,5 +24,3 @@ __pycache__/
 *.sln
 *.sw?
 
-# Test/dummy scripts
-quickdine/_misc/*
