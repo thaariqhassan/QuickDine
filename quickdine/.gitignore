@@ -22,7 +22,3 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-
-# Test/dummy scripts
-quickdine/_misc/*
-*.py
