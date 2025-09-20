@@ -44,7 +44,7 @@ function LoginCard({className, showLoginCard, closeLoginCard}) {
     try {
       const res = await axios.post("http://127.0.0.1:8000/login", form1);
       // Login successful
-      setMessage(`Success!`);
+      setMessage(`Logged In Successfully`);
       console.log("Login Successful");
       // TODO: Store JWT or session here if implemented
     } catch (err) {
