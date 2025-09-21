@@ -17,3 +17,23 @@ class UserResponse(BaseModel):
 
     class Config:
         orm_mode = True
+
+class RestaurantsResponse(BaseModel):
+    id: int
+
+    name: str
+    cuisine: str
+    cuisine_type: str
+    description: str
+    address: str
+
+    halal: bool
+
+    price: int
+    rating: float
+
+    seats_total: int
+    seats_current: int
+
+    longitude: float
+    latitude: float
