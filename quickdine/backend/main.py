@@ -7,6 +7,8 @@ from database import Base, engine, SessionLocal
 
 from auth import hash_password, verify_password
 
+from typing import List
+
 # Create tables in SQLite
 Base.metadata.create_all(bind=engine)
 
@@ -57,3 +59,9 @@ def get_users(user_email : str, user_pwd : str, db: Session = Depends(get_db)):
         return activeUser
     else:
         raise HTTPException(status_code=404, detail="Invalid credentials")"""
+
+# Restaurants
+@app.get("/restaurants/", response_model=List[schemas.RestaurantsResponse])
+def restaurants_list(user: schemas.UserCreate, db: Session = Depends(get_db)):
+    db_restaurants = db.query(models.Restaurant).all()
+    return db_restaurants
