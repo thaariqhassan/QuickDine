@@ -24,7 +24,7 @@ class Restaurant(Base):
     halal = Column(Boolean, index=True) # Yes
 
     price = Column(Integer, index=True) # 1000
-    rating = Column(Integer, index=True) # 10.0
+    rating = Column(Numeric(2,1), index=True) # 10.0
 
     seats_total = Column(Integer, index=True) # 75
     seats_current = Column(Integer, index=True) # 74

@@ -30,7 +30,7 @@ class RestaurantsResponse(BaseModel):
     halal: bool
 
     price: int
-    rating: int
+    rating: float
 
     seats_total: int
     seats_current: int
