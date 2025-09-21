@@ -1,6 +1,7 @@
 import { useState, useEffect, React } from "react";
 import axios from "axios";
 import "../componentStyles/LoginCard.css"
+import { useNavigate } from 'react-router'
 
 
 function LoginCard({className, showLoginCard, closeLoginCard}) {
@@ -11,7 +12,7 @@ function LoginCard({className, showLoginCard, closeLoginCard}) {
     const [form1, setForm1] = useState({email: "" ,password: ""});
     const [accountExists,setAccountExists] = useState(true)
     const [message, setMessage] = useState("");
-
+    const navigate = useNavigate();
    /*
     // Fetch all users
   useEffect(() => {
@@ -54,6 +55,7 @@ function LoginCard({className, showLoginCard, closeLoginCard}) {
         setMessage("Server error. Please try again later.");
       }
     }
+    navigate("/restaurants");
   };
 
   //Handle input
