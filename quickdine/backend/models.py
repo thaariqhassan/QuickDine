@@ -1,5 +1,7 @@
-from sqlalchemy import Column, Integer, String, Boolean, Numeric
+from sqlalchemy import Column, Integer, String, Boolean, Numeric, ForeignKey, DateTime, Float
+from sqlalchemy.orm import relationship
 from database import Base
+import datetime
 # schema creation for db
 class User(Base):
     __tablename__ = "users"
@@ -8,6 +10,7 @@ class User(Base):
     name = Column(String, index=True)
     email = Column(String, unique=True, index=True)
     password = Column(String,nullable=False)
+    orders = relationship("OrderHistory", back_populates="user")
 
 
 class Restaurant(Base):
@@ -32,3 +35,15 @@ class Restaurant(Base):
     longitude = Column(Numeric(10,8), index=True) #38.897778
     latitude = Column(Numeric(10,8), index=True) #-77.036389
 
+class OrderHistory(Base):
+    __tablename__ = "order_history"
+
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, ForeignKey("users.id"))   # FK → users table
+    item_name = Column(String, nullable=False)
+    quantity = Column(Integer, nullable=False)
+    price = Column(Float, nullable=False)
+    placed_at = Column(DateTime, default=datetime.utcnow)
+
+    # relationship to User
+    user = relationship("User", back_populates="orders")

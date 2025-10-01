@@ -80,7 +80,7 @@ def login(user: schemas.UserLogin, db: Session = Depends(get_db)):
     db_user = db.query(models.User).filter(models.User.email == user.email).first()
     if not db_user or not verify_password(user.password, db_user.password):
         raise HTTPException(status_code=401, detail="Invalid credentials")
-    return {"message": "Login successful"}
+    return {"message": "Login successful","user_id": db_user.id}
 
 
 """@app.get("/users/", response_model=schemas.UserResponse)
@@ -104,3 +104,17 @@ def restaurants_init(db: Session = Depends(get_db)):
 def restaurants_list(db: Session = Depends(get_db)):
     db_restaurants = db.query(models.Restaurant).all()
     return db_restaurants
+
+# Create new order
+@app.post("/orders/", response_model=schemas.OrderResponse)
+def create_order(order: schemas.OrderCreate, user_id: int, db: Session = Depends(get_db)):
+    new_order = models.OrderHistory(user_id=user_id, **order.model_dump())
+    db.add(new_order)
+    db.commit()
+    db.refresh(new_order)
+    return new_order
+
+# Get all orders for a user
+@app.get("/orders/{user_id}", response_model=list[schemas.OrderResponse])
+def get_orders(user_id: int, db: Session = Depends(get_db)):
+    return db.query(models.OrderHistory).filter(models.OrderHistory.user_id == user_id).all()
