@@ -31,7 +31,7 @@ function Home(){
           <div className='nav-btn'>Home</div>
           <div className='nav-btn' onClick={() => navigate("/restaurants")}>Restaurants</div>
           <div className='nav-btn'>About us</div>
-          <div className='nav-btn'>Blog</div>
+          <div className='nav-btn'onClick={() => navigate("/profile")}>Profile</div>
         </div>
         <div className='act-btn' onClick={() => {setLoginClicked(true)}}>Login</div>
       </div>

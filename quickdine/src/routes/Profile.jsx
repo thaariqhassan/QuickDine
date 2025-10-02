@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from "axios";
 import OrderHistoryCard from '../components/OrderHistoryCard';
+import "../routeStyles/Profile.css"
 
 function Profile() {
     const name = localStorage.getItem("user_name");
@@ -14,7 +15,7 @@ function Profile() {
       .catch(err => console.error(err));
   }, []);
   return(
-    <>  
+    <div className='Profile-layout'> 
       <div className='user-details-container'>
         <div className="user-name">{name}</div>
         <div className="user-name">{email_id}</div>
@@ -32,7 +33,7 @@ function Profile() {
             </div>
         ))
         */}
-    </>
+    </div>
   )
 }
 
