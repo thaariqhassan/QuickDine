@@ -26,9 +26,9 @@
 {
     /*height: 100%;*/
     padding: 10px;
-
-    position: sticky;
     position: -webkit-sticky;
+    position: sticky;
+    
 }
 
 .restaurant-body-sidebar-scrollable

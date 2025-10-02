@@ -49,6 +49,9 @@ function LoginCard({className, showLoginCard, closeLoginCard}) {
       setMessage(`Logged In Successfully`);
       console.log("Login Successful");
       localStorage.setItem("user_id",userId);
+      localStorage.setItem("user_name",res.data.user_name);
+      localStorage.setItem("user_email",res.data.user_email);
+      console.log(res.data.user_name);
       console.log(userId);
       // TODO: Store JWT or session here if implemented
     } catch (err) {

@@ -1,7 +1,7 @@
 from sqlalchemy import Column, Integer, String, Boolean, Numeric, ForeignKey, DateTime, Float
 from sqlalchemy.orm import relationship
 from database import Base
-import datetime
+from datetime import datetime, timezone
 # schema creation for db
 class User(Base):
     __tablename__ = "users"
@@ -43,7 +43,7 @@ class OrderHistory(Base):
     item_name = Column(String, nullable=False)
     quantity = Column(Integer, nullable=False)
     price = Column(Float, nullable=False)
-    placed_at = Column(DateTime, default=datetime.utcnow)
+    placed_at = Column(DateTime, default=datetime.now(timezone.utc))
 
     # relationship to User
     user = relationship("User", back_populates="orders")
