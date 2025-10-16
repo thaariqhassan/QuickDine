@@ -160,10 +160,10 @@ function Restaurants(){
       <div className='header'>
         <div className='logo'>QUICKDINE</div>
         <div className='mid-navbar'>
-          <div className='nav-btn'>Home</div>
+          <div className='nav-btn' onClick={() => navigate("/")}>Home</div>
           <div className='nav-btn' onClick={() => navigate("/restaurants")}>Restaurants</div>
           <div className='nav-btn'>About us</div>
-          <div className='nav-btn'>Blog</div>
+          <div className='nav-btn'>Profile</div>
         </div>
         <div className='act-btn'>Login</div>
       </div>
@@ -353,22 +353,24 @@ function Restaurants(){
                   return(
                     <Grid item key={restaurant.rid}>
                       <Card style={{width:"100%"}} key={index} sx={{maxWidth: 300}}>
-                        <CardContent>
-                          <CardMedia component="img" height="150" image={restaurantimage} alt="Restaurant Image">
-                          </CardMedia>
-                        </CardContent>
-                        <CardContent>
-                          <Typography variant="h6">
-                            {restaurant.name}
-                          </Typography>
-                        </CardContent>
-                        <CardActions>
-                          <Chip label={restaurant.cuisine}/>
-                          <Chip label={restaurant.type}/>
-                          {
-                            (restaurant.halal==="yes" && <Chip label="Halal"/>)
-                          }
-                        </CardActions>
+                        <CardActionArea>
+                          <CardContent>
+                            <CardMedia component="img" height="150" image={restaurantimage} alt="Restaurant Image">
+                            </CardMedia>
+                          </CardContent>
+                          <CardContent>
+                            <Typography variant="h6">
+                              {restaurant.name}
+                            </Typography>
+                          </CardContent>
+                          <CardActions>
+                            <Chip label={restaurant.cuisine}/>
+                            <Chip label={restaurant.type}/>
+                            {
+                              (restaurant.halal==="yes" && <Chip label="Halal"/>)
+                            }
+                          </CardActions>
+                        </CardActionArea>
                       </Card>
                     </Grid>
                   )})
