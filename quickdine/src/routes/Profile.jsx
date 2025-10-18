@@ -16,23 +16,17 @@ function Profile() {
   }, []);
   return(
     <div className='Profile-layout'> 
-      <div className='user-details-container'>
-        <div className="user-name">{name}</div>
-        <div className="user-name">{email_id}</div>
+      <div style={{background:'white',borderRadius:'10px', width:'80%',margin:'50px'}}>
+
+        <div className='user-details-container'>
+          <div className="user-name">Name : {name}</div>
+          <div className="user-name">Email id : {email_id}</div>
+        </div>
+
+        <OrderHistoryCard/>
+        
       </div>
-      <div className="list-of-order-history">
-        <OrderHistoryCard />
-        <OrderHistoryCard />
-        <OrderHistoryCard />
-        <OrderHistoryCard />
-      </div>
-        {/*
-        orderList.map(order => (
-            <div key={order.id}>
-                <p>{order.item_name} - ₹{order.price}</p>
-            </div>
-        ))
-        */}
+      <div>Logout</div>
     </div>
   )
 }

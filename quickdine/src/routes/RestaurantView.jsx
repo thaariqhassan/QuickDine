@@ -184,7 +184,7 @@ function RestaurantView(){
             </div>
         </div>
         <div>
-          <div style={{display: "flex", flexDirection: "row", alignItems: "flex-start", width: "100%", alignItems: "center"}}>
+          <div style={{display: "flex", flexDirection: "row", alignItems: "flex-start", width: "100%"}}>
             <Typography variant="h4">
               Reviews
             </Typography>

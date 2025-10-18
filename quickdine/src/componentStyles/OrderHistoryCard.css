@@ -1,0 +1,161 @@
+.order-history {
+  background: #f8f9fb;
+  min-height: 100vh;
+  padding: 2rem;
+  font-family: "Inter", sans-serif;
+}
+
+.order-container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+h1 {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #1e1e1e;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  color: #6b7280;
+  margin-bottom: 2rem;
+}
+
+.order-card {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+
+.order-header p {
+  margin: 0.2rem 0;
+  color: #374151;
+}
+
+.order-header span {
+  font-weight: 500;
+  color: #6b7280;
+}
+
+.order-buttons {
+  display: flex;
+  gap: 0.8rem;
+  margin-top: 0.5rem;
+}
+
+button {
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+button.outline {
+  background: transparent;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  padding: 0.4rem 0.8rem;
+  transition: all 0.2s ease;
+}
+
+button.outline:hover {
+  border-color: #f59e0b;
+  color: #f59e0b;
+}
+
+.product-row {
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid #f1f3f5;
+  padding-top: 1rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
+.product-info {
+  display: flex;
+  gap: 1rem;
+}
+
+.product-info img {
+  width: 90px;
+  height: 90px;
+  border-radius: 8px;
+  object-fit: cover;
+  border: 1px solid #e5e7eb;
+}
+
+.product-info h2 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 0.2rem;
+}
+
+.desc {
+  color: #6b7280;
+  font-size: 0.9rem;
+  margin-bottom: 0.3rem;
+}
+
+.order-id {
+  color: #9ca3af;
+  font-size: 0.85rem;
+}
+
+.delivered {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #22c55e;
+  font-size: 0.85rem;
+  margin-top: 0.3rem;
+}
+
+.product-actions {
+  text-align: right;
+  min-width: 120px;
+}
+
+.price {
+  font-weight: 600;
+  color: #111827;
+}
+
+button.link {
+  background: none;
+  border: none;
+  color: #f97316;
+  cursor: pointer;
+  margin-top: 0.3rem;
+  margin-left: 0.5rem;
+}
+
+button.link:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .order-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .product-row {
+    flex-direction: column;
+  }
+
+  .product-actions {
+    text-align: left;
+    margin-top: 0.5rem;
+  }
+}

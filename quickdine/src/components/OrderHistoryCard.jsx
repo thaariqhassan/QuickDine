@@ -1,47 +1,94 @@
-import * as React from 'react';
-import Card from '@mui/material/Card';
-import CardHeader from '@mui/material/CardHeader';
-import CardMedia from '@mui/material/CardMedia';
-import CardContent from '@mui/material/CardContent';
-import CardActions from '@mui/material/CardActions';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import ShareIcon from '@mui/icons-material/Share';
-
+import React from "react";
+import "../componentStyles/OrderHistoryCard.css"
+import { CheckCircle } from "lucide-react";
 
 export default function OrderHistoryCard() {
+  const orders = [
+    {
+      id: "WU88191111",
+      date: "Jul 6, 2021",
+      total: "$160.00",
+      products: [
+        {
+          name: "CHANEL Moon - Clutch",
+          description: "Half Moon Shoulder Bag",
+          qty: 3,
+          price: "$700.00",
+          orderId: "#2778299902Chloe",
+          delivered: "January 12, 2021",
+          image:
+            "https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=400",
+        },
+        {
+          name: 'CHANEL "Ruffle Clutch"',
+          description: "Chanel Ruffle Clutch with Wristlet",
+          qty: 3,
+          price: "$6530.00",
+          orderId: "#2778299902Chloe",
+          delivered: "January 12, 2021",
+          image:
+            "https://images.unsplash.com/photo-1606813902794-7d68a9ddf5a7?w=400",
+        },
+      ],
+    },
+  ];
 
   return (
-    <Card sx={{ maxWidth: 345 }}>
-      <CardHeader
-        
-        title="Kubaba"
-        subheader="Edappally"
-      />
-      <CardMedia
-        component="img"
-        height="194"
-        image="/static/images/cards/paella.jpg"
-        alt="Paella dish"
-      />
-      <CardContent>
-        <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-          Come and experience our delicious Mediterranean and Persian cuisine.
-          Speciality traditional dishes prepared using premium ingredients, 
-          enjoy our signature KUZHIMANDI and SHAWARMA; 
-          paired with our wide selection of fine fresh fruit juice and Mojito. 
-          All of the meat and chicken dishes at KUBABA are fresh and Halal.
-        </Typography>
-      </CardContent>
-      <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
-        </IconButton>
-        <IconButton aria-label="share">
-          <ShareIcon />
-        </IconButton>
-      </CardActions>
-    </Card>
+    <div className="order-history">
+      <div className="order-container">
+        <h1>Order History</h1>
+        <p className="subtitle">
+          Check the status of recent orders, manage returns, and discover similar
+          products.
+        </p>
+
+        {orders.map((order) => (
+          <div key={order.id} className="order-card">
+            <div className="order-header">
+              <div>
+                <p>
+                  <span>Order Number:</span> {order.id}
+                </p>
+                <p>
+                  <span>Date Placed:</span> {order.date}
+                </p>
+                <p>
+                  <span>Total Amount:</span> {order.total}
+                </p>
+              </div>
+              <div className="order-buttons">
+                <button className="outline">View Order</button>
+                <button className="outline">View Invoice</button>
+              </div>
+            </div>
+
+            {order.products.map((product, i) => (
+              <div key={i} className="product-row">
+                <div className="product-info">
+                  <img src={product.image} alt={product.name} />
+                  <div>
+                    <h2>{product.name}</h2>
+                    <p className="desc">{product.description}</p>
+                    <p>Qty × {product.qty}</p>
+                    <p className="order-id">Order ID: {product.orderId}</p>
+                    <p className="delivered">
+                      <CheckCircle size={14} color="#22c55e" /> Delivered on{" "}
+                      {product.delivered}
+                    </p>
+                  </div>
+                </div>
+                <div className="product-actions">
+                  <p className="price">{product.price}</p>
+                  <div>
+                    <button className="link">View Product</button>
+                    <button className="link">Buy Again</button>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
+    </div>
   );
 }
