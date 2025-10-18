@@ -16,16 +16,15 @@ function Profile() {
   }, []);
   return(
     <div className='Profile-layout'> 
-      <div style={{background:'white',borderRadius:'10px', width:'80%',margin:'50px'}}>
-
-        <div className='user-details-container'>
-          <div className="user-name">Name : {name}</div>
-          <div className="user-name">Email id : {email_id}</div>
-        </div>
-
-        <OrderHistoryCard/>
-        
+      
+      <div className='user-details-container'>
+        <h2>{name.toUpperCase()}</h2>
+        <div className="user-name">Email id : {email_id}</div>
+        <div className="user-name">phone number : 1234567890</div>
       </div>
+
+      <OrderHistoryCard/>
+        
       <div>Logout</div>
     </div>
   )

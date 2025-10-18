@@ -34,7 +34,7 @@ export default function OrderHistoryCard() {
   ];
 
   return (
-    <div className="order-history">
+    <div className="order-history" style={{width:'100%'}}>
       <div className="order-container">
         <h1>Order History</h1>
         <p className="subtitle">
