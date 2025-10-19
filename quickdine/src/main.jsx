@@ -6,6 +6,7 @@ import Restaurants from "./routes/Restaurants";
 import RestaurantView from "./routes/RestaurantView";
 import Profile from "./routes/Profile";
 import Header from "./components/Header";
+import About from './routes/About';
 
 function Main(){
   const [loginClicked,setLoginClicked] = useState(false);
@@ -18,6 +19,7 @@ function Main(){
       <Route path="/restaurants" element={<Restaurants/>} />
       <Route path="/restaurantview" element={<RestaurantView/>} />
       <Route path="/profile" element={<Profile/>} />
+      <Route path='/about'  element={<About/>}/>
     </Routes>
   </BrowserRouter>
   );

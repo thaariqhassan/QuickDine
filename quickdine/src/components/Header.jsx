@@ -10,7 +10,7 @@ function Header({loginClicked, setLoginClicked, access}) {
         <div className='mid-navbar'>
           <div className='nav-btn' onClick={() => navigate("/")}>Home</div>
           <div className='nav-btn' onClick={() => {access? navigate("/restaurants"):null}}>Restaurants</div>
-          <div className='nav-btn'>About us</div>
+          <div className='nav-btn' onClick={() => navigate("/about")}>About us</div>
           <div className='nav-btn'onClick={() =>{access? navigate("/profile"):null}}>Profile</div>
         </div>
         <div className='act-btn' onClick={() => {access? navigate("/restaurants"):setLoginClicked(true)}}>{access ? 'order table':'Login'}</div>
