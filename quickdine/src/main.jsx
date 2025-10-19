@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route } from "react-router";
 import Home from "./routes/Home";
 import Restaurants from "./routes/Restaurants";
-import RestaurantView from "./routes/RestaurantView";
+import RestaurantView from "./routes/ordering/orderRoutes/RestaurantView";
 import Profile from "./routes/Profile";
 import Header from "./components/Header";
 import About from './routes/About';
@@ -16,8 +16,8 @@ function Main(){
   <Header loginClicked={loginClicked} setLoginClicked={setLoginClicked} access={access}/>
    <Routes>
       <Route path="/" element={<Home loginClicked={loginClicked} setLoginClicked={setLoginClicked} setAccess={setAccess}/>} />
-      <Route path="/restaurants" element={<Restaurants/>} />
-      <Route path="/restaurantview" element={<RestaurantView/>} />
+      <Route path="/restaurants" element={<Restaurants/>}/>
+      <Route path="/restaurants/:id" element={<RestaurantView/>} />
       <Route path="/profile" element={<Profile/>} />
       <Route path='/about'  element={<About/>}/>
     </Routes>

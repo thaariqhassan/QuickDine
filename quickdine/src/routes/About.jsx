@@ -1,11 +1,9 @@
 import React from 'react'
+import RestaurantView from './ordering/orderRoutes/RestaurantView'
 
 function About() {
   return (
-    <div>
-      About us page<br></br>
-      Yohaan Complete it
-    </div>
+    <RestaurantView/>
   )
 }
 
