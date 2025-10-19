@@ -156,19 +156,6 @@ function Restaurants(){
 
   return (
     <>
-    <div className = "red-box">
-      <div className='header'>
-        <div className='logo'>QUICKDINE</div>
-        <div className='mid-navbar'>
-          <div className='nav-btn' onClick={() => navigate("/")}>Home</div>
-          <div className='nav-btn' onClick={() => navigate("/restaurants")}>Restaurants</div>
-          <div className='nav-btn'>About us</div>
-          <div className='nav-btn'>Profile</div>
-        </div>
-        <div className='act-btn'>Login</div>
-      </div>
-    </div>
-
     <div className='restaurant-body'>
       <div className='restaurant-body-sidebar'>
         <Typography variant="h6">

@@ -4,9 +4,8 @@ import "../routeStyles/Home.css"
 import restaurantimage from "../assets/images/restaurant.jpg"
 import Card from '../components/Card'
 import LoginCard from '../components/LoginCard'
-function Home(){
-  const [loginClicked,setLoginClicked] = useState(false);
-  const navigate = useNavigate();
+function Home({loginClicked,setLoginClicked}){
+  
   const features = [
     {
       heading : "Explore Restaurants",
@@ -25,16 +24,6 @@ function Home(){
   <>
   <div className='Outer-Home' style={loginClicked ? {opacity:'0.5', filter:'blur(20px)'} : null}>
     <div className = "red-box">
-      <div className='header'>
-        <div className='logo'>QUICKDINE</div>
-        <div className='mid-navbar'>
-          <div className='nav-btn'>Home</div>
-          <div className='nav-btn' onClick={() => navigate("/restaurants")}>Restaurants</div>
-          <div className='nav-btn'>About us</div>
-          <div className='nav-btn'onClick={() => navigate("/profile")}>Profile</div>
-        </div>
-        <div className='act-btn' onClick={() => {setLoginClicked(true)}}>Login</div>
-      </div>
       <div className='body-section'>
         <div className="tagline">
           <h2>Dine Smarter, Reserve Faster.</h2>
