@@ -4,7 +4,7 @@ import "../componentStyles/LoginCard.css"
 import { useNavigate } from 'react-router'
 
 
-function LoginCard({className, showLoginCard, closeLoginCard}) {
+function LoginCard({className, showLoginCard, closeLoginCard, setAccess}) {
     if (!showLoginCard) return null;
     
     const [users, setUsers] = useState([]);
@@ -32,6 +32,7 @@ function LoginCard({className, showLoginCard, closeLoginCard}) {
       const res = await axios.post("http://127.0.0.1:8000/users/", form);
       setUsers([...users, res.data]); // update list
       setForm({ name: "", email: "" }); // clear form
+      alert("User Created Successfully")
     } catch (err) {
       console.error(err);
     }
@@ -47,6 +48,8 @@ function LoginCard({className, showLoginCard, closeLoginCard}) {
       // Login successful
       const userId = res.data.user_id;
       setMessage(`Logged In Successfully`);
+      //spcce for login card closing IMPORTANT LINE 66-68 has to be placed here
+      // it is placed below for smoother testing purposes only
       console.log("Login Successful");
       localStorage.setItem("user_id",userId);
       localStorage.setItem("user_name",res.data.user_name);
@@ -61,6 +64,9 @@ function LoginCard({className, showLoginCard, closeLoginCard}) {
         setMessage("Server error. Please try again later.");
       }
     }
+    setAccess(true);
+    alert("Login successfull");
+    closeLoginCard();
     navigate("/restaurants");
   };
 

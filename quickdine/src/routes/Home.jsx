@@ -4,7 +4,7 @@ import "../routeStyles/Home.css"
 import restaurantimage from "../assets/images/restaurant.jpg"
 import Card from '../components/Card'
 import LoginCard from '../components/LoginCard'
-function Home({loginClicked,setLoginClicked}){
+function Home({loginClicked, setLoginClicked, setAccess}){
   
   const features = [
     {
@@ -49,6 +49,7 @@ function Home({loginClicked,setLoginClicked}){
     className="login-card"
     showLoginCard={loginClicked}
     closeLoginCard = {() => setLoginClicked(false)}
+    setAccess={setAccess}
   />
   </>
   )
