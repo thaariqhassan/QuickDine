@@ -42,6 +42,8 @@ class Restaurant(Base):
     available_seats = Column(Integer, nullable=False)
     longitude = Column(Numeric(10, 8), index=True)
     latitude = Column(Numeric(10, 8), index=True)
+    image = Column(String, index=True)
+    address = Column(String, index=True)
 
     # Owner (optional)
     owner_id = Column(Integer, ForeignKey("users.id"), nullable=True)

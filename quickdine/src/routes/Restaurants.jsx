@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router";
+import api from "../api/axios.js"
 
 import "../routeStyles/Restaurant.css";
 
@@ -84,75 +85,20 @@ function Restaurants() {
   ]);
   const handleCuisines = (event, newValue) => setCuisines(newValue);
 
-  // Dummy restaurant data
-  const restaurants = [
-    {
-      rid: "1",
-      name: "Mamma's",
-      cuisine: "Multi-cuisine",
-      type: "Non-veg",
-      halal: "no",
-      rating: 4.5,
-      price: "₹800",
-      distance: "2.5 km",
-      description: "An upscale casual restaurant providing a relaxed yet refined dining experience...",
-    },
-    {
-      rid: "2",
-      name: "MaxFun",
-      cuisine: "Multi-cuisine",
-      type: "Non-veg",
-      halal: "no",
-      rating: 4.2,
-      price: "₹600",
-      distance: "1.8 km",
-      description: "A vibrant and lively casual dining spot, popular among youth...",
-    },
-    {
-      rid: "3",
-      name: "Dine Inn Kasa",
-      cuisine: "Multi-cuisine",
-      type: "Non-veg",
-      halal: "no",
-      rating: 4.0,
-      price: "₹750",
-      distance: "3.2 km",
-      description: "An upscale casual restaurant providing a relaxed yet refined dining experience...",
-    },
-    {
-      rid: "4",
-      name: "Arabian Palace",
-      cuisine: "Middle Eastern",
-      type: "Non-veg",
-      halal: "yes",
-      rating: 4.8,
-      price: "₹900",
-      distance: "4.0 km",
-      description: "An authentic Middle Eastern restaurant renowned for its grilled meats...",
-    },
-    {
-      rid: "5",
-      name: "Spice Garden",
-      cuisine: "North Indian",
-      type: "Veg",
-      halal: "yes",
-      rating: 4.6,
-      price: "₹550",
-      distance: "1.2 km",
-      description: "Pure vegetarian North Indian cuisine with authentic flavors...",
-    },
-    {
-      rid: "6",
-      name: "Dragon Wok",
-      cuisine: "Chinese",
-      type: "Non-veg",
-      halal: "no",
-      rating: 4.3,
-      price: "₹700",
-      distance: "2.8 km",
-      description: "Authentic Chinese cuisine with a modern twist...",
-    },
-  ];
+  // Fetching of restaurants from database
+  const [restaurants, setRestaurants] = useState([]);
+
+  useEffect(() => {
+    const fetchRestaurants = async () => {
+      try {
+        const response = await api.get("/restaurants/list");
+        setRestaurants(response.data);
+      } catch (err) {
+        console.error("Failed to fetch restaurants:", err);
+      }
+    };
+    fetchRestaurants();
+  }, []);
 
   return (
     <div className="restaurant-page">
@@ -303,13 +249,13 @@ function Restaurants() {
           {/* Restaurant Cards */}
           <Grid container spacing={3} className="restaurant-grid">
             {restaurants.map((restaurant) => (
-              <Grid item xs={12} sm={6} md={4} key={restaurant.rid}>
+              <Grid item xs={12} sm={6} md={4} key={restaurant.id}>
                 <Card className="restaurant-card" elevation={3}>
-                  <CardActionArea onClick={() => navigate(`/restaurants/${restaurant.rid}`)}>
+                  <CardActionArea onClick={() => navigate(`/restaurants/${restaurant.id}`)}>
                     <CardMedia
                       component="img"
                       height="200"
-                      image={restaurantimage}
+                      image={restaurant.image}
                       alt={restaurant.name}
                       className="restaurant-card-image"
                     />
@@ -330,7 +276,7 @@ function Restaurants() {
                           💰 {restaurant.price} for two
                         </Typography>
                         <Typography variant="body2" color="text.secondary">
-                          📍 {restaurant.distance}
+                          📍 {restaurant.address}
                         </Typography>
                       </Box>
                     </CardContent>

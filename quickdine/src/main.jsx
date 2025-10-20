@@ -7,6 +7,7 @@ import RestaurantView from "./routes/ordering/orderRoutes/RestaurantView";
 import Profile from "./routes/Profile";
 import Header from "./components/Header";
 import About from './routes/About';
+import HotelDashboard from "./hotel/hotelRoutes/HotelDashboard";
 
 function Main(){
   const [loginClicked,setLoginClicked] = useState(false);
@@ -20,6 +21,7 @@ function Main(){
       <Route path="/restaurants/:id" element={<RestaurantView/>} />
       <Route path="/profile" element={<Profile/>} />
       <Route path='/about'  element={<About/>}/>
+      <Route path="/dashboard" element={<HotelDashboard/>}/>
     </Routes>
   </BrowserRouter>
   );
