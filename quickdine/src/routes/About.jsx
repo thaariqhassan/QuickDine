@@ -1,9 +1,10 @@
 import React from 'react'
-import RestaurantView from './ordering/orderRoutes/RestaurantView'
+import PlacingOrder from './ordering/orderRoutes/PlacingOrder'
+
 
 function About() {
   return (
-    <RestaurantView/>
+    <PlacingOrder/>
   )
 }
 
