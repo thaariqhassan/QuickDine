@@ -42,6 +42,22 @@ class UserResponse(UserBase):
 # ========================
 # RESTAURANTS
 # ========================
+
+class RestaurantCreate(BaseModel):
+    name: str
+    cuisine: str
+    cuisine_type: str
+    description: str
+    address: str
+    image:str
+    halal: bool
+    price: int
+    rating: float
+    seats_total: int
+    seats_current: int
+    longitude: float
+    latitude: float
+
 class RestaurantsResponse(BaseModel):
     id: int
     name: str

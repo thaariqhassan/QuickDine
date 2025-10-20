@@ -8,17 +8,21 @@ import Profile from "./routes/Profile";
 import Header from "./components/Header";
 import About from './routes/About';
 import HotelDashboard from "./hotel/hotelRoutes/HotelDashboard";
+import HotelHeader from "./hotel/hotelComponents/HotelHeader";
 import PlacingOrder from './routes/ordering/orderRoutes/PlacingOrder';
+import RegisterRestaurant from './hotel/RegisterRestaurant';
 
 function Main(){
   const [loginClicked,setLoginClicked] = useState(false);
   const [access, setAccess] = useState(false);
+  const [isRestaurant, setIsRestaurant] = useState(false);
   return(
   <BrowserRouter>
-  <Header loginClicked={loginClicked} setLoginClicked={setLoginClicked} access={access}/>
+  {isRestaurant? <HotelHeader/>:<Header loginClicked={loginClicked} setLoginClicked={setLoginClicked} access={access}/>}
    <Routes>
       <Route path="/" element={<Home loginClicked={loginClicked} setLoginClicked={setLoginClicked} setAccess={setAccess}/>} />
       <Route path="/restaurants" element={<Restaurants/>}/>
+      <Route path="/registerRestaurant" element={<RegisterRestaurant/>}/>
       <Route path="/restaurants/:id" element={<RestaurantView/>} />
       <Route path="/restaurants/:id/placingOrder" element={<PlacingOrder/>} />
       <Route path="/profile" element={<Profile/>} />
