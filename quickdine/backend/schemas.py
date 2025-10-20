@@ -14,7 +14,7 @@ class ReservationStatus(str, Enum):
 
 
 # ========================
-# USER SCHEMAS
+# USERS
 # ========================
 class UserBase(BaseModel):
     name: str
@@ -40,9 +40,10 @@ class UserResponse(UserBase):
 
 
 # ========================
-# RESTAURANT SCHEMAS
+# RESTAURANTS
 # ========================
-class RestaurantBase(BaseModel):
+class RestaurantsResponse(BaseModel):
+    id: int
     name: str
     cuisine: str
     cuisine_type: str
@@ -56,16 +57,12 @@ class RestaurantBase(BaseModel):
     longitude: float
     latitude: float
 
-
-class RestaurantsResponse(RestaurantBase):
-    id: int
-
     class Config:
         orm_mode = True
 
 
 # ========================
-# RESERVATION SCHEMAS
+# RESERVATIONS
 # ========================
 class ReservationBase(BaseModel):
     user_id: int
@@ -87,17 +84,13 @@ class ReservationResponse(ReservationBase):
 
 
 # ========================
-# ORDER HISTORY SCHEMAS
+# ORDER HISTORY
 # ========================
-class OrderHistoryBase(BaseModel):
+class OrderHistoryResponse(BaseModel):
+    id: int
     item_name: str
     quantity: int
     price: float
-
-
-class OrderHistoryResponse(OrderHistoryBase):
-    id: int
-    user_id: int
     placed_at: datetime
 
     class Config:

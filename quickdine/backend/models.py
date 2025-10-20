@@ -5,9 +5,6 @@ from datetime import datetime, timezone
 import enum
 
 
-# ========================
-# ENUMS
-# ========================
 class ReservationStatus(str, enum.Enum):
     pending = "pending"
     confirmed = "confirmed"
@@ -15,72 +12,59 @@ class ReservationStatus(str, enum.Enum):
     cancelled = "cancelled"
 
 
-# ========================
-# USER MODEL
-# ========================
 class User(Base):
     __tablename__ = "users"
 
     id = Column(Integer, primary_key=True, index=True)
-    name = Column(String, nullable=False)
-    email = Column(String, unique=True, nullable=False, index=True)
+    name = Column(String, index=True)
+    email = Column(String, unique=True, index=True)
     password = Column(String, nullable=False)
     is_restaurant = Column(Boolean, default=False)
 
     # Relationships
     reservations = relationship("Reservation", back_populates="user")
     orders = relationship("OrderHistory", back_populates="user")
-    owned_restaurants = relationship("Restaurant", back_populates="owner")
 
 
-# ========================
-# RESTAURANT MODEL
-# ========================
 class Restaurant(Base):
     __tablename__ = "restaurants"
 
     id = Column(Integer, primary_key=True, index=True)
-    name = Column(String, nullable=False)
-    cuisine = Column(String)
-    cuisine_type = Column(String)
-    description = Column(String)
-    address = Column(String)
-    halal = Column(Boolean, default=False)
-    price = Column(Integer)
-    rating = Column(Numeric(2, 1))
+    name = Column(String, index=True)
+    cuisine = Column(String, index=True)
+    cuisine_type = Column(String, index=True)
+    description = Column(String, index=True)
+    address = Column(String, index=True)
+    halal = Column(Boolean, index=True)
+    price = Column(Integer, index=True)
+    rating = Column(Numeric(2, 1), index=True)
     total_seats = Column(Integer, nullable=False)
     available_seats = Column(Integer, nullable=False)
-    longitude = Column(Numeric(10, 8))
-    latitude = Column(Numeric(10, 8))
+    longitude = Column(Numeric(10, 8), index=True)
+    latitude = Column(Numeric(10, 8), index=True)
 
-    owner_id = Column(Integer, ForeignKey("users.id"))
-    owner = relationship("User", back_populates="owned_restaurants")
+    # Owner (optional)
+    owner_id = Column(Integer, ForeignKey("users.id"), nullable=True)
+    owner = relationship("User")
 
     # Relationships
     reservations = relationship("Reservation", back_populates="restaurant")
 
 
-# ========================
-# RESERVATION MODEL
-# ========================
 class Reservation(Base):
     __tablename__ = "reservations"
 
     id = Column(Integer, primary_key=True, index=True)
-    user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
-    restaurant_id = Column(Integer, ForeignKey("restaurants.id"), nullable=False)
-    seats_reserved = Column(Integer, nullable=False)
-    date = Column(Date, nullable=False)
+    user_id = Column(Integer, ForeignKey("users.id"))
+    restaurant_id = Column(Integer, ForeignKey("restaurants.id"))
+    seats_reserved = Column(Integer)
+    date = Column(Date)
     status = Column(Enum(ReservationStatus), default=ReservationStatus.pending)
 
-    # Relationships
     user = relationship("User", back_populates="reservations")
     restaurant = relationship("Restaurant", back_populates="reservations")
 
 
-# ========================
-# ORDER HISTORY MODEL
-# ========================
 class OrderHistory(Base):
     __tablename__ = "order_history"
 
