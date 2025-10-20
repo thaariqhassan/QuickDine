@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Star, ShoppingCart, MapPin } from "lucide-react";
 import "../orderStyles/RestaurantView.css";
+import { useNavigate, useParams } from "react-router";
 
 // Dummy comments
 const comments = [
@@ -25,6 +26,8 @@ function getAvatarColor(index) {
 }
 
 function RestaurantView() {
+  const { restaurant_id } = useParams();
+  const navigate = useNavigate();
   const [imageIndex, setImageIndex] = useState(0);
   const restaurantimage = "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1200&h=800&fit=crop";
 
@@ -65,7 +68,7 @@ function RestaurantView() {
             </div>
 
             <div className="restaurant-buttons">
-              <button className="btn order-btn">
+              <button className="btn order-btn" onClick={() =>{navigate(`/restaurants/${restaurant_id}/placingOrder`)}}>
                 <ShoppingCart size={20} />
                 Order
               </button>

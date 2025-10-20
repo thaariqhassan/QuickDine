@@ -3,12 +3,14 @@ import {
   Calendar,Clock,Users,Phone,
   Mail,User,CheckCircle
 } from "lucide-react";
-
+import { useParams } from "react-router";
+import api from "../../../api/axios";
 import "../orderStyles/PlacingOrder.css";
 
 function PlacingOrder(){
   const [reservations, setReservations] = useState([]);
-
+  const [message, setMessage] = useState("");
+  const { id } = useParams();
   const [formData, setFormData] = useState({
     name: "", email: "", phone: "", date: "",
     time: "", guests: 2, specialRequests: "",
@@ -31,6 +33,7 @@ function PlacingOrder(){
       ...formData,
       status: "pending",
     };
+    handleReserve(newReservation.guests,newReservation.date)
     setReservations((prev) => [...prev, newReservation]);
     setSubmitted(true);
 
@@ -48,6 +51,19 @@ function PlacingOrder(){
     }, 3000);
   };
 
+  const userId = localStorage.getItem("user_id");
+  const handleReserve = async (seats,date) => {
+    try {
+      const res = await api.post("/api/reserve", null, {
+        params: { user_id: userId, restaurant_id: id, seats_reserved: seats, schedule_date: date },
+      });
+      setMessage(res.data.message);
+    } catch (err) {
+      console.error("Reservation failed:", err);
+      setMessage("Reservation failed");
+    }
+  };
+
   const CustomerInterface = () => (
     <div className="page customer-bg">
       <div className="form-container">
@@ -60,7 +76,7 @@ function PlacingOrder(){
           {submitted ? (
             <div className="success-box">
               <CheckCircle className="success-icon" />
-              <h3 className="success-title">Reservation Submitted!</h3>
+              <h3 className="success-title">{message}</h3>
               <p className="success-text">
                 We'll confirm your booking shortly via email.
               </p>

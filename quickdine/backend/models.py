@@ -61,6 +61,7 @@ class Reservation(Base):
     restaurant_id = Column(Integer, ForeignKey("restaurants.id"))
     seats_reserved = Column(Integer)
     date = Column(Date)
+    schedule_date = Column(Date)
     status = Column(Enum(ReservationStatus), default=ReservationStatus.pending)
 
     user = relationship("User", back_populates="reservations")
