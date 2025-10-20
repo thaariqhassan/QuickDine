@@ -4,11 +4,11 @@ import "../componentStyles/LoginCard.css"
 import { useNavigate } from 'react-router'
 
 
-function LoginCard({className, showLoginCard, closeLoginCard, setAccess}) {
+function LoginCard({className, showLoginCard, closeLoginCard, setAccess,setIsRestaurant}) {
     if (!showLoginCard) return null;
     
     const [users, setUsers] = useState([]);
-    const [form, setForm] = useState({ name: "", email: "" ,password: ""});
+    const [form, setForm] = useState({ name: "", email: "" ,password: "",is_restaurant: false});
     const [form1, setForm1] = useState({email: "" ,password: ""});
     const [accountExists,setAccountExists] = useState(true)
     const [message, setMessage] = useState("");
@@ -37,6 +37,8 @@ function LoginCard({className, showLoginCard, closeLoginCard, setAccess}) {
       const res = await axios.post("http://127.0.0.1:8000/login", form1);
       // Login successful
       const userId = res.data.user_id;
+      const is_restaurant = res.data.is_restaurant;
+      setIsRestaurant(is_restaurant);
       setMessage(`Logged In Successfully`);
       //spcce for login card closing IMPORTANT LINE 66-68 has to be placed here
       // it is placed below for smoother testing purposes only
