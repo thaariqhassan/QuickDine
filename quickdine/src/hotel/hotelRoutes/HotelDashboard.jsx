@@ -5,21 +5,7 @@ import {
 } from "lucide-react";
 import "../../routes/ordering/orderStyles/PlacingOrder.css";
 function HotelDashboard(){
-
-     const [reservations, setReservations] = useState([
-        {
-          id: 1,
-          name: "John Doe",
-          email: "john@example.com",
-          phone: "+91 9876543210",
-          date: "2025-10-25",
-          time: "19:00",
-          guests: 4,
-          specialRequests: "Window seat preferred",
-          status: "pending",
-        },
-      ]);
-
+    
     const getStatusColor = (status) => {
     switch (status) {
       case "confirmed":
@@ -38,6 +24,39 @@ function HotelDashboard(){
       )
     );
   };
+
+  const handleStatusConfirm = async (id, newStatus) => {
+  try {
+    // API call — confirm or update reservation
+    await api.put(`/api/orders/${id}/confirm`);
+
+    // Update UI state
+    setReservations((prev) =>
+      prev.map((res) =>
+        res.id === id ? { ...res, status: newStatus } : res
+      )
+    );
+
+    console.log(`Reservation ${id} status updated to ${newStatus}`);
+  } catch (error) {
+    console.error("Error updating reservation:", error);
+  }
+};
+
+
+  const [reservations, setReservations] = useState([]);
+  const restaurantId = localStorage.getItem("user_id");
+  useEffect(() => {
+    const fetchOrders = async () => {
+      try {
+        const res = await api.get(`/api/restaurant/${restaurantId}/orders`);
+        setReservations(res.data);
+      } catch (err) {
+        console.error("Failed to fetch orders:", err);
+      }
+    };
+    fetchOrders();
+  }, [restaurantId]);
 
     return(
     <div className="page hotel-bg">
@@ -112,7 +131,7 @@ function HotelDashboard(){
                       <button
                         className="btn-confirm"
                         onClick={() =>
-                          handleStatusChange(reservation.id, "confirmed")
+                          handleStatusConfirm(reservation.id, "confirmed")
                         }
                       >
                         <CheckCircle size={16} /> Confirm
