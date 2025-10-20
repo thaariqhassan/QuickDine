@@ -59,6 +59,27 @@ def login(user: schemas.UserLogin, db: Session = Depends(get_db)):
         "is_restaurant": db_user.is_restaurant
     }
 
+@app.post("/restaurants/add")
+def add_restaurant(restaurant: schemas.RestaurantCreate, db: Session = Depends(get_db)):
+    new_restaurant = models.Restaurant(
+        name=restaurant.name,
+        cuisine=restaurant.cuisine,
+        cuisine_type=restaurant.cuisine_type,
+        description=restaurant.description,
+        address=restaurant.address,
+        halal=restaurant.halal,
+        price=restaurant.price,
+        rating=restaurant.rating,
+        seats_total=restaurant.seats_total,
+        seats_current=restaurant.seats_current,
+        longitude=restaurant.longitude,
+        latitude=restaurant.latitude
+    )
+    db.add(new_restaurant)
+    db.commit()
+    db.refresh(new_restaurant)
+    return {"message": "Restaurant added successfully", "restaurant": new_restaurant}
+
 
 # ✅ Restaurant endpoints
 @app.get("/restaurants/list", response_model=List[schemas.RestaurantsResponse])

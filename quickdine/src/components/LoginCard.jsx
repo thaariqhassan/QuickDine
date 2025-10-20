@@ -13,16 +13,6 @@ function LoginCard({className, showLoginCard, closeLoginCard, setAccess}) {
     const [accountExists,setAccountExists] = useState(true)
     const [message, setMessage] = useState("");
     const navigate = useNavigate();
-   /*
-    // Fetch all users
-  useEffect(() => {
-    axios.get("http://127.0.0.1:8000/users/")
-      .then(res => setUsers(res.data))
-      .catch(err => console.error(err));
-  }, []);
-  */
-  
-
 
 
   // Add user
@@ -131,6 +121,7 @@ function LoginCard({className, showLoginCard, closeLoginCard, setAccess}) {
         <div className="login-sign">
           <div>{accountExists ? "Don't have an Account?" : "If you have an account"}</div>
           <div onClick={() => setAccountExists(!accountExists)}>{accountExists ? "Login" : "Sign In"}</div>
+          <div onClick={() => navigate("/registerRestaurant")}>{accountExists ? "":"register as a restaurant"}</div>
         </div>
         
 
