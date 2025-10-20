@@ -20,7 +20,7 @@ function Main(){
   <BrowserRouter>
   {isRestaurant? <HotelHeader/>:<Header loginClicked={loginClicked} setLoginClicked={setLoginClicked} access={access}/>}
    <Routes>
-      <Route path="/" element={<Home loginClicked={loginClicked} setLoginClicked={setLoginClicked} setAccess={setAccess}/>} />
+      <Route path="/" element={<Home loginClicked={loginClicked} setLoginClicked={setLoginClicked} setAccess={setAccess} setIsRestaurant={setIsRestaurant}/>} />
       <Route path="/restaurants" element={<Restaurants/>}/>
       <Route path="/registerRestaurant" element={<RegisterRestaurant/>}/>
       <Route path="/restaurants/:id" element={<RestaurantView/>} />
