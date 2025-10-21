@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from datetime import date, datetime
+from datetime import date, datetime, time
 from enum import Enum
 
 
@@ -86,8 +86,12 @@ class ReservationBase(BaseModel):
     seats_reserved: int
 
 
-class ReservationCreate(ReservationBase):
-    pass
+class ReservationCreate(BaseModel):
+    user_id: int
+    restaurant_id: int
+    seats_reserved: int
+    schedule_date: date
+    schedule_time: str
 
 
 class ReservationResponse(ReservationBase):

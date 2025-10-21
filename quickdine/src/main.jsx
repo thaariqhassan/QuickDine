@@ -9,7 +9,6 @@ import Header from "./components/Header";
 import About from './routes/About';
 import HotelDashboard from "./hotel/hotelRoutes/HotelDashboard";
 import HotelHeader from "./hotel/hotelComponents/HotelHeader";
-import PlacingOrder from './routes/ordering/orderRoutes/PlacingOrder';
 import RegisterRestaurant from './hotel/RegisterRestaurant';
 
 function Main(){
@@ -24,7 +23,6 @@ function Main(){
       <Route path="/restaurants" element={<Restaurants/>}/>
       <Route path="/registerRestaurant" element={<RegisterRestaurant/>}/>
       <Route path="/restaurants/:id" element={<RestaurantView/>} />
-      <Route path="/restaurants/:id/placingOrder" element={<PlacingOrder/>} />
       <Route path="/profile" element={<Profile/>} />
       <Route path='/about'  element={<About/>}/>
       <Route path="/dashboard" element={<HotelDashboard/>}/>

@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Star, ShoppingCart, MapPin } from "lucide-react";
 import "../orderStyles/RestaurantView.css";
-import { useNavigate,useSearchParams, useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
+import PlacingOrder from "./PlacingOrder";
 
 // Dummy comments
 const comments = [
@@ -26,6 +27,7 @@ function getAvatarColor(index) {
 }
 
 function RestaurantView() {
+  const [orderClicked, setOrderClicked] = useState(false);
   const {id} = useParams();
   const restaurants = JSON.parse(localStorage.getItem("restaurant_list"));
   console.log(restaurants);
@@ -35,22 +37,26 @@ function RestaurantView() {
   );
   console.log(selected_restaurant)
   const navigate = useNavigate();
-  const [imageIndex, setImageIndex] = useState(0);
   const restaurantimage = "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1200&h=800&fit=crop";
+  
 
   return (
+    <>
+
+    {orderClicked ? (<PlacingOrder restaurant_id={id}/>): (
+
     <div className="restaurant-body">
       <div className="restaurant-container">
         
-        {/* Main Section */}
+       
         <div className="restaurant-main">
           
-          {/* Image */}
+         
           <div className="restaurant-image-section">
             <img src={restaurantimage} alt="Restaurant" className="restaurant-image"/>
           </div>
 
-          {/* Info */}
+         
           <div className="restaurant-info">
             <h1 className="restaurant-title">{selected_restaurant.name}</h1>
             <p className="restaurant-desc">
@@ -75,7 +81,7 @@ function RestaurantView() {
             </div>
 
             <div className="restaurant-buttons">
-              <button className="btn order-btn" onClick={() =>{navigate(`/restaurants/${id}/placingOrder`)}}>
+              <button className="btn order-btn" onClick={() =>{setOrderClicked(true)}}>
                 <ShoppingCart size={20} />
                 Order
               </button>
@@ -116,6 +122,9 @@ function RestaurantView() {
           </div>
         </div>
     </div>
+
+    )}
+  </>
   );
 }
 

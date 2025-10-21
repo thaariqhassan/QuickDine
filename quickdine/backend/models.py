@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Boolean, Numeric, ForeignKey, DateTime, Float, Date, Enum
+from sqlalchemy import Column, Integer, String, Boolean, Numeric, ForeignKey, DateTime, Float, Date, Enum, Time
 from sqlalchemy.orm import relationship
 from database import Base
 from datetime import datetime, timezone
@@ -60,8 +60,8 @@ class Reservation(Base):
     user_id = Column(Integer, ForeignKey("users.id"))
     restaurant_id = Column(Integer, ForeignKey("restaurants.id"))
     seats_reserved = Column(Integer)
-    date = Column(Date)
     schedule_date = Column(Date)
+    schedule_time = Column(String)
     status = Column(Enum(ReservationStatus), default=ReservationStatus.pending)
 
     user = relationship("User", back_populates="reservations")

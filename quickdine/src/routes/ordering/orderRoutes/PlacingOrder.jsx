@@ -1,212 +1,116 @@
-import React, { useState } from "react";
-import {
-  Calendar,Clock,Users,Phone,
-  Mail,User,CheckCircle
-} from "lucide-react";
-import { useParams } from "react-router";
-import api from "../../../api/axios";
-import "../orderStyles/PlacingOrder.css";
+import { useState } from 'react';
+import "../orderStyles/PlacingOrder.css"
+import api from "../../../api/axios"
 
-function PlacingOrder(){
-  const [reservations, setReservations] = useState([]);
-  const [message, setMessage] = useState("");
-  const { id } = useParams();
+export default function PlacingOrder({restaurant_id}) {
+
   const [formData, setFormData] = useState({
-    name: "", email: "", phone: "", date: "",
-    time: "", guests: 2, specialRequests: "",
+    seats: 1,
+    time: '',
+    date: ''
   });
 
-  const [submitted, setSubmitted] = useState(false);
-
-  const handleInputChange = (e) => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({
+    setFormData(prev => ({
       ...prev,
-      [name]: value,
+      [name]: value
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const newReservation = {
-      id: reservations.length + 1,
-      ...formData,
-      status: "pending",
-    };
-    handleReserve(newReservation.guests,newReservation.date)
-    setReservations((prev) => [...prev, newReservation]);
-    setSubmitted(true);
+    console.log('Form submitted:', formData);
+    alert(`Reservation Details:\nSeats: ${formData.seats}\nDate: ${formData.date}\nTime: ${formData.time}`);
 
-    setTimeout(() => {
-      setSubmitted(false);
-      setFormData({
-        name: "",
-        email: "",
-        phone: "",
-        date: "",
-        time: "",
-        guests: 2,
-        specialRequests: "",
-      });
-    }, 3000);
-  };
-
-  const userId = localStorage.getItem("user_id");
-  const handleReserve = async (seats,date) => {
-    try {
-      const res = await api.post("/api/reserve", null, {
-        params: { user_id: userId, restaurant_id: id, seats_reserved: seats, schedule_date: date },
-      });
-      setMessage(res.data.message);
-    } catch (err) {
-      console.error("Reservation failed:", err);
-      setMessage("Reservation failed");
+    const form2 = {
+      user_id : localStorage.getItem("user_id"),
+      restaurant_id : restaurant_id,
+      seats_reserved : formData.seats,
+      schedule_date : formData.date,
+      schedule_time : formData.time
     }
-  };
+    const { userId, restaurantId, guests, date, time } = form2;
 
-  const CustomerInterface = () => (
-    <div className="page customer-bg">
-      <div className="form-container">
-        <div className="card">
-          <div className="text-center">
-            <h1 className="title">Reserve Your Table</h1>
-            <p className="subtitle">Book your dining experience with us</p>
+    await handleReserve(
+  1,                      // hardcoded user ID
+  1,                      // hardcoded restaurant ID  
+  2,                      // hardcoded seats
+  "2024-01-15",           // hardcoded date
+  "18:30"                 // hardcoded time
+  );
+    //await handleReserve(userId, restaurantId, guests, date, time);
+
+  }
+
+  const handleReserve = async (userId, restaurantId, seatsReserved, scheduleDate, scheduleTime) => {
+  try {
+
+    const response = await api.post("http://127.0.0.1:8000/api/reserve", {
+      user_id: userId,
+      restaurant_id: restaurantId,
+      seats_reserved: seatsReserved,
+      schedule_date: scheduleDate,
+      schedule_time: scheduleTime
+    });
+
+    console.log("✅ Reservation successful:", response.data);
+    alert(response.data.message);
+  } catch (error) {
+    console.error("❌ Reservation failed:", error);
+    alert("Failed to create reservation");
+  }
+};
+
+  return (
+    <div className="container">
+      <div className="form-wrapper">
+        <h1 className="form-title">Make a Reservation</h1>
+        <form onSubmit={handleSubmit} className="reservation-form">
+          <div className="form-group">
+            <label htmlFor="seats">Number of Seats</label>
+            <input
+              type="number"
+              id="seats"
+              name="seats"
+              min="1"
+              max="20"
+              value={formData.seats}
+              onChange={handleChange}
+              required
+              placeholder="Enter number of seats"
+            />
           </div>
 
-          {submitted ? (
-            <div className="success-box">
-              <CheckCircle className="success-icon" />
-              <h3 className="success-title">{message}</h3>
-              <p className="success-text">
-                We'll confirm your booking shortly via email.
-              </p>
-            </div>
-          ) : (
-            <form onSubmit={handleSubmit} className="reservation-form">
-              <div>
-                <label className="label">
-                  <User size={16} className="label-icon" />
-                  Full Name
-                </label>
-                <input
-                  type="text"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleInputChange}
-                  required
-                  className="input"
-                  placeholder="Enter your name"
-                />
-              </div>
+          <div className="form-group">
+            <label htmlFor="date">Date</label>
+            <input
+              type="date"
+              id="date"
+              name="date"
+              value={formData.date}
+              onChange={handleChange}
+              required
+            />
+          </div>
 
-              <div className="form-row">
-                <div>
-                  <label className="label">
-                    <Mail size={16} className="label-icon" />
-                    Email
-                  </label>
-                  <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    required
-                    className="input"
-                    placeholder="your@email.com"
-                  />
-                </div>
+          <div className="form-group">
+            <label htmlFor="time">Time</label>
+            <input
+              type="time"
+              id="time"
+              name="time"
+              value={formData.time}
+              onChange={handleChange}
+              required
+            />
+          </div>
 
-                <div>
-                  <label className="label">
-                    <Phone size={16} className="label-icon" />
-                    Phone
-                  </label>
-                  <input
-                    type="tel"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleInputChange}
-                    required
-                    className="input"
-                    placeholder="+91 XXXXXXXXXX"
-                  />
-                </div>
-              </div>
-
-              <div className="form-row">
-                <div>
-                  <label className="label">
-                    <Calendar size={16} className="label-icon" />
-                    Date
-                  </label>
-                  <input
-                    type="date"
-                    name="date"
-                    value={formData.date}
-                    onChange={handleInputChange}
-                    required
-                    min={new Date().toISOString().split("T")[0]}
-                    className="input"
-                  />
-                </div>
-
-                <div>
-                  <label className="label">
-                    <Clock size={16} className="label-icon" />
-                    Time
-                  </label>
-                  <input
-                    type="time"
-                    name="time"
-                    value={formData.time}
-                    onChange={handleInputChange}
-                    required
-                    className="input"
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label className="label">
-                  <Users size={16} className="label-icon" />
-                  Number of Guests
-                </label>
-                <select
-                  name="guests"
-                  value={formData.guests}
-                  onChange={handleInputChange}
-                  className="input"
-                >
-                  {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((num) => (
-                    <option key={num} value={num}>
-                      {num} {num === 1 ? "Guest" : "Guests"}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              <div>
-                <label className="label">Special Requests (Optional)</label>
-                <textarea
-                  name="specialRequests"
-                  value={formData.specialRequests}
-                  onChange={handleInputChange}
-                  rows="3"
-                  className="input textarea"
-                  placeholder="Any dietary restrictions, seating preferences..."
-                />
-              </div>
-
-              <button type="submit" className="btn-submit">
-                Reserve Table
-              </button>
-            </form>
-          )}
-        </div>
+          <button type="submit" className="submit-btn">
+            Reserve Now
+          </button>
+        </form>
       </div>
     </div>
   );
-  return <CustomerInterface />;
-};
-
-export default PlacingOrder;
+}

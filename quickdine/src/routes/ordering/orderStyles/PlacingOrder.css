@@ -1,281 +1,115 @@
-.page {
+/* Reset and Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Container */
+.container {
   min-height: 100vh;
-  padding: 32px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  padding: 20px;
 }
 
-.customer-bg {
-  background: linear-gradient(135deg, #fff7ed, #ffebee);
-}
-
-.hotel-bg {
-  background: linear-gradient(135deg, #e3f2fd, #e8eaf6);
-}
-
-.card {
-  background: #fff;
+/* Form Wrapper */
+.form-wrapper {
+  background: white;
   border-radius: 16px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
-  padding: 32px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  padding: 40px;
+  width: 100%;
+  max-width: 450px;
 }
 
-.title {
+/* Form Title */
+.form-title {
   font-size: 28px;
-  font-weight: bold;
+  font-weight: 700;
   color: #333;
-  margin-bottom: 8px;
-}
-
-.subtitle {
-  color: #666;
-  margin-bottom: 24px;
-}
-
-.text-center {
+  margin-bottom: 30px;
   text-align: center;
 }
 
-/* Form styles */
+/* Reservation Form */
 .reservation-form {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 20px;
 }
 
-.form-row {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 16px;
-}
-
-@media (min-width: 768px) {
-  .form-row {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
-.label {
-  display: flex;
-  align-items: center;
-  font-weight: 600;
-  color: #444;
-  margin-bottom: 6px;
-}
-
-.label-icon {
-  margin-right: 6px;
-}
-
-.input {
-  width: 100%;
-  padding: 12px;
-  border: 2px solid #ddd;
-  border-radius: 8px;
-  transition: border-color 0.2s, box-shadow 0.2s;
-}
-
-.input:focus {
-  border-color: #ff7043;
-  outline: none;
-  box-shadow: 0 0 0 2px rgba(255, 112, 67, 0.2);
-}
-
-.textarea {
-  resize: none;
-}
-
-.btn-submit {
-  width: 100%;
-  padding: 14px;
-  background: linear-gradient(90deg, #ff7043, #e53935);
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-weight: bold;
-  font-size: 16px;
-  cursor: pointer;
-  transition: transform 0.2s, background 0.2s;
-}
-
-.btn-submit:hover {
-  background: linear-gradient(90deg, #f4511e, #c62828);
-  transform: scale(1.03);
-}
-
-/* Success message */
-.success-box {
-  background-color: #e8f5e9;
-  border: 2px solid #c8e6c9;
-  border-radius: 12px;
-  padding: 24px;
-  text-align: center;
-}
-
-.success-icon {
-  width: 64px;
-  height: 64px;
-  color: #43a047;
-  margin-bottom: 12px;
-}
-
-.success-title {
-  font-size: 22px;
-  color: #2e7d32;
-  margin-bottom: 8px;
-}
-
-.success-text {
-  color: #388e3c;
-}
-
-/* Switch view link */
-.switch-view {
-  margin-top: 16px;
-}
-
-.link {
-  color: #f4511e;
-  font-weight: 600;
-  font-size: 14px;
-  text-decoration: underline;
-  background: none;
-  border: none;
-  cursor: pointer;
-}
-
-.link:hover {
-  color: #d84315;
-}
-
-/* Hotel interface */
-.hotel-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 24px;
-}
-
-.reservation-count {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  background-color: #e3f2fd;
-  padding: 8px 14px;
-  border-radius: 8px;
-  font-weight: bold;
-  color: #1565c0;
-}
-
-.reservation-list {
+/* Form Group */
+.form-group {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-}
-
-.reservation-card {
-  border: 2px solid #ddd;
-  border-radius: 12px;
-  padding: 20px;
-  transition: box-shadow 0.3s;
-}
-
-.reservation-card:hover {
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.1);
-}
-
-.reservation-name {
-  display: flex;
-  align-items: center;
   gap: 8px;
-  margin-bottom: 8px;
 }
 
-.reservation-name h3 {
-  font-size: 18px;
-  font-weight: bold;
-}
-
-.status {
-  padding: 4px 8px;
-  border-radius: 12px;
-  font-size: 12px;
-  font-weight: 600;
-}
-
-.status-confirmed {
-  background-color: #e8f5e9;
-  color: #2e7d32;
-}
-
-.status-rejected {
-  background-color: #ffebee;
-  color: #c62828;
-}
-
-.status-pending {
-  background-color: #fff8e1;
-  color: #ef6c00;
-}
-
-.reservation-details p {
-  display: flex;
-  align-items: center;
-  gap: 6px;
+.form-group label {
   font-size: 14px;
+  font-weight: 600;
   color: #555;
 }
 
-.special-requests {
-  background-color: #f5f5f5;
-  padding: 8px;
+.form-group input {
+  padding: 12px 16px;
+  font-size: 16px;
+  border: 2px solid #e0e0e0;
   border-radius: 8px;
-  margin-top: 8px;
-  font-size: 14px;
+  transition: all 0.3s ease;
+  outline: none;
 }
 
-.reservation-actions {
-  margin-top: 12px;
-  display: flex;
-  gap: 8px;
+.form-group input:focus {
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
 }
 
-.btn-confirm,
-.btn-reject {
-  display: flex;
-  align-items: center;
-  gap: 6px;
+.form-group input::placeholder {
+  color: #aaa;
+}
+
+/* Submit Button */
+.submit-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
-  padding: 8px 12px;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 14px;
   border: none;
   border-radius: 8px;
   cursor: pointer;
-  font-weight: 600;
-  transition: background 0.2s;
+  transition: all 0.3s ease;
+  margin-top: 10px;
 }
 
-.btn-confirm {
-  background-color: #43a047;
+.submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
 }
 
-.btn-confirm:hover {
-  background-color: #2e7d32;
+.submit-btn:active {
+  transform: translateY(0);
 }
 
-.btn-reject {
-  background-color: #e53935;
-}
+/* Responsive Design */
+@media (max-width: 480px) {
+  .form-wrapper {
+    padding: 30px 20px;
+  }
 
-.btn-reject:hover {
-  background-color: #c62828;
-}
-
-/* Empty state */
-.empty-state {
-  text-align: center;
-  color: #777;
-  padding: 40px 0;
-}
-
-.empty-icon {
-  color: #aaa;
-  margin-bottom: 8px;
+  .form-title {
+    font-size: 24px;
+  }
 }

@@ -1,8 +1,10 @@
 import React from "react";
 import "../routeStyles/About.css";
+import PlacingOrder from "./ordering/orderRoutes/PlacingOrder";
 
 function About() {
-  return (
+
+  return(
     <div className="about-page">
       {/* Hero */}
       <section className="about-hero">

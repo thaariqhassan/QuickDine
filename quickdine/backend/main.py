@@ -89,18 +89,18 @@ def restaurants_list(db: Session = Depends(get_db)):
 
 # ✅ Reservation: create
 @app.post("/api/reserve")
-def create_reservation(user_id: int, restaurant_id: int, seats_reserved: int, schedule_date : date, db: Session = Depends(get_db)):
-    restaurant = db.query(models.Restaurant).filter(models.Restaurant.id == restaurant_id).first()
-    if not restaurant:
-        raise HTTPException(status_code=404, detail="Restaurant not found")
+def create_reservation(data: schemas.ReservationCreate, db: Session = Depends(get_db)):
+    restaurant = db.query(models.Restaurant).filter(models.Restaurant.id == data.restaurant_id).first()
+    """if not restaurant:
+        raise HTTPException(status_code=404, detail="Restaurant not found")"""
 
     new_res = models.Reservation(
-        user_id=user_id,
-        restaurant_id=restaurant_id,
-        seats_reserved=seats_reserved,
-        date=date.today(),
-        schedule_date = schedule_date,
-        status=ReservationStatus.pending
+        user_id=data.user_id,
+        restaurant_id=data.restaurant_id,
+        seats_reserved=data.seats_reserved,
+        schedule_date=data.schedule_date,
+        schedule_time=data.schedule_time,
+        status=models.ReservationStatus.pending
     )
     db.add(new_res)
     db.commit()
