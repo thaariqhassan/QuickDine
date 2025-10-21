@@ -3,6 +3,7 @@ import {
   Calendar,Clock,Users,Phone,
   Mail,CheckCircle,XCircle,List
 } from "lucide-react";
+import api from "../../api/axios";
 import "../../routes/ordering/orderStyles/PlacingOrder.css";
 function HotelDashboard(){
     
@@ -46,15 +47,25 @@ function HotelDashboard(){
 
   const [reservations, setReservations] = useState([]);
   const restaurantId = localStorage.getItem("user_id");
+
+  const [orders, setOrders] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const res = await api.get(`/api/restaurant/${restaurantId}/orders`);
-        setReservations(res.data);
+        const response = await api.get(
+          `http://127.0.0.1:8000/api/restaurant/${restaurantId}/orders`
+        );
+        setOrders(response.data);
       } catch (err) {
-        console.error("Failed to fetch orders:", err);
+        setError(err.message || "Something went wrong");
+      } finally {
+        setLoading(false);
       }
     };
+
     fetchOrders();
   }, [restaurantId]);
 
@@ -69,22 +80,22 @@ function HotelDashboard(){
             </div>
             <div className="reservation-count">
               <List size={20} />
-              <span>{reservations.length} Reservations</span>
+              <span>{orders.length} Reservations</span>
             </div>
           </div>
 
           <div className="reservation-list">
-            {reservations.length === 0 ? (
+            {orders.length === 0 ? (
               <div className="empty-state">
                 <List size={48} className="empty-icon" />
                 <p>No reservations yet</p>
               </div>
             ) : (
-              reservations.map((reservation) => (
+              orders.map((reservation) => (
                 <div key={reservation.id} className="reservation-card">
                   <div className="reservation-info">
                     <div className="reservation-name">
-                      <h3>{reservation.name}</h3>
+                      <h3>{reservation.user.name}</h3>
                       <span
                         className={`status ${getStatusColor(
                           reservation.status
@@ -96,14 +107,14 @@ function HotelDashboard(){
 
                     <div className="reservation-details">
                       <p>
-                        <Mail size={14} /> {reservation.email}
+                        <Mail size={14} /> {reservation.user.email}
                       </p>
                       <p>
-                        <Phone size={14} /> {reservation.phone}
+                        <Phone size={14} /> 98654525865
                       </p>
                       <p>
                         <Calendar size={14} />{" "}
-                        {new Date(reservation.date).toLocaleDateString("en-US", {
+                        {new Date(reservation.schedule_date).toLocaleDateString("en-US", {
                           weekday: "long",
                           year: "numeric",
                           month: "long",
@@ -111,19 +122,12 @@ function HotelDashboard(){
                         })}
                       </p>
                       <p>
-                        <Clock size={14} /> {reservation.time}
+                        <Clock size={14} /> {reservation.schedule_time}
                       </p>
                       <p>
-                        <Users size={14} /> {reservation.guests} Guests
+                        <Users size={14} /> {reservation.seats_reserved} Guests
                       </p>
                     </div>
-
-                    {reservation.specialRequests && (
-                      <div className="special-requests">
-                        <strong>Special Requests:</strong>{" "}
-                        {reservation.specialRequests}
-                      </div>
-                    )}
                   </div>
 
                   {reservation.status === "pending" && (
