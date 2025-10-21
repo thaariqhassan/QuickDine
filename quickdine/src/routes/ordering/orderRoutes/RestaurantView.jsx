@@ -47,20 +47,20 @@ function RestaurantView() {
           
           {/* Image */}
           <div className="restaurant-image-section">
-            <img src={restaurantimage} alt="Restaurant" className="restaurant-image" />
+            <img src={restaurantimage} alt="Restaurant" className="restaurant-image"/>
           </div>
 
           {/* Info */}
           <div className="restaurant-info">
             <h1 className="restaurant-title">{selected_restaurant.name}</h1>
             <p className="restaurant-desc">
-              Description of the restaurant goes here. Enjoy authentic cuisine in a cozy atmosphere with exceptional service.
+              {selected_restaurant.description}
             </p>
 
             <div className="restaurant-tags">
-              <span className="tag blue">{selected_restaurant.cusine}</span>
+              <span className="tag blue">{selected_restaurant.cuisine}</span>
               <span className="tag blue">Fine Dining</span>
-              <span className="tag green">{selected_restaurant.halal =='yes' ? "HALAL":"Not-halal"}</span>
+              <span className="tag green">{selected_restaurant.halal =='yes' ? "Halal":"Not-halal"}</span>
             </div>
 
             <div className="restaurant-price">
@@ -86,8 +86,8 @@ function RestaurantView() {
             </div>
           </div>
         </div>
-
-        {/* Reviews */}
+      </div>
+      {/* Reviews ------------------------------------*/}
         <div className="reviews-section">
           <h2 className="reviews-title">Customer Reviews</h2>
           <div className="reviews-grid">
@@ -115,8 +115,6 @@ function RestaurantView() {
             ))}
           </div>
         </div>
-
-      </div>
     </div>
   );
 }
