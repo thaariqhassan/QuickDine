@@ -1,5 +1,3 @@
-import React from 'react'
-
 import React, { useState } from 'react';
 import { MapPin, Utensils, DollarSign, Star, Users, ImageIcon } from 'lucide-react';
 import "./RegisterRestaurant.css"
