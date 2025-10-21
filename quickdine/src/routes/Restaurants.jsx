@@ -208,6 +208,8 @@ function Restaurants() {
           return 0;
       }
     });
+    console.log(filteredRestaurants);
+    localStorage.setItem("restaurant_list",JSON.stringify(filteredRestaurants));
 
   return (
     <Box sx={{ 

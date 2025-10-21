@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Star, ShoppingCart, MapPin } from "lucide-react";
 import "../orderStyles/RestaurantView.css";
-import { useNavigate, useParams } from "react-router";
+import { useNavigate,useSearchParams, useParams } from "react-router";
 
 // Dummy comments
 const comments = [
@@ -26,7 +26,14 @@ function getAvatarColor(index) {
 }
 
 function RestaurantView() {
-  const { restaurant_id } = useParams();
+  const {id} = useParams();
+  const restaurants = JSON.parse(localStorage.getItem("restaurant_list"));
+  console.log(restaurants);
+  console.log(id);
+  const selected_restaurant = restaurants.find(r =>
+    r.rid === id
+  );
+  console.log(selected_restaurant)
   const navigate = useNavigate();
   const [imageIndex, setImageIndex] = useState(0);
   const restaurantimage = "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1200&h=800&fit=crop";
@@ -45,15 +52,15 @@ function RestaurantView() {
 
           {/* Info */}
           <div className="restaurant-info">
-            <h1 className="restaurant-title">Hotel Name</h1>
+            <h1 className="restaurant-title">{selected_restaurant.name}</h1>
             <p className="restaurant-desc">
               Description of the restaurant goes here. Enjoy authentic cuisine in a cozy atmosphere with exceptional service.
             </p>
 
             <div className="restaurant-tags">
-              <span className="tag blue">Italian Cuisine</span>
+              <span className="tag blue">{selected_restaurant.cusine}</span>
               <span className="tag blue">Fine Dining</span>
-              <span className="tag green">Halal</span>
+              <span className="tag green">{selected_restaurant.halal =='yes' ? "HALAL":"Not-halal"}</span>
             </div>
 
             <div className="restaurant-price">
@@ -63,12 +70,12 @@ function RestaurantView() {
 
             <div className="restaurant-rating">
               <Star className="star-icon" size={28} />
-              <span className="rating-value">4.9</span>
+              <span className="rating-value">{selected_restaurant.rating}</span>
               <span className="rating-count">({comments.length} reviews)</span>
             </div>
 
             <div className="restaurant-buttons">
-              <button className="btn order-btn" onClick={() =>{navigate(`/restaurants/${restaurant_id}/placingOrder`)}}>
+              <button className="btn order-btn" onClick={() =>{navigate(`/restaurants/${id}/placingOrder`)}}>
                 <ShoppingCart size={20} />
                 Order
               </button>
