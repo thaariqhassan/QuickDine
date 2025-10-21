@@ -96,7 +96,11 @@ class ReservationCreate(BaseModel):
 
 class ReservationResponse(ReservationBase):
     id: int
-    date: date
+    user_id: int
+    restaurant_id: int
+    seats_reserved: int
+    schedule_date: date
+    schedule_time: str
     status: ReservationStatus
 
     class Config:

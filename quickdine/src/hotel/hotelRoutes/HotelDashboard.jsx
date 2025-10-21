@@ -4,7 +4,7 @@ import {
   Mail,CheckCircle,XCircle,List
 } from "lucide-react";
 import api from "../../api/axios";
-import "../../routes/ordering/orderStyles/PlacingOrder.css";
+import "./HotelDashboard.css";
 function HotelDashboard(){
     
     const getStatusColor = (status) => {
@@ -45,12 +45,9 @@ function HotelDashboard(){
 };
 
 
-  const [reservations, setReservations] = useState([]);
-  const restaurantId = localStorage.getItem("user_id");
-
+  //const restaurantId = localStorage.getItem("user_id");
+  const restaurantId = 1;
   const [orders, setOrders] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchOrders = async () => {
@@ -60,9 +57,8 @@ function HotelDashboard(){
         );
         setOrders(response.data);
       } catch (err) {
-        setError(err.message || "Something went wrong");
-      } finally {
-        setLoading(false);
+        console.log( "Something went wrong");
+        console.log(err);
       }
     };
 
@@ -85,6 +81,7 @@ function HotelDashboard(){
           </div>
 
           <div className="reservation-list">
+            
             {orders.length === 0 ? (
               <div className="empty-state">
                 <List size={48} className="empty-icon" />
@@ -95,7 +92,7 @@ function HotelDashboard(){
                 <div key={reservation.id} className="reservation-card">
                   <div className="reservation-info">
                     <div className="reservation-name">
-                      <h3>{reservation.user.name}</h3>
+                      <h3>{reservation.user_id}</h3>
                       <span
                         className={`status ${getStatusColor(
                           reservation.status
@@ -107,7 +104,7 @@ function HotelDashboard(){
 
                     <div className="reservation-details">
                       <p>
-                        <Mail size={14} /> {reservation.user.email}
+                        <Mail size={14} /> {reservation.user_id}
                       </p>
                       <p>
                         <Phone size={14} /> 98654525865
