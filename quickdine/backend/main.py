@@ -1,5 +1,5 @@
 from fastapi import FastAPI, Depends, HTTPException
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, joinedload
 from fastapi.middleware.cors import CORSMiddleware
 from models import ReservationStatus, Reservation
 import models, schemas
@@ -110,11 +110,16 @@ def create_reservation(data: schemas.ReservationCreate, db: Session = Depends(ge
     db.refresh(new_res)
     return {"message": "Reservation created", "reservation_id": new_res.id}
 
-
-# ✅ Get restaurant’s orders
+# Get all reservations
 @app.get("/api/restaurant/{restaurant_id}/orders", response_model=List[schemas.ReservationResponse])
 def get_restaurant_orders(restaurant_id: int, db: Session = Depends(get_db)):
-    return db.query(models.Reservation).filter(models.Reservation.restaurant_id == restaurant_id).all()
+    reservations = (
+        db.query(models.Reservation)
+        .options(joinedload(models.Reservation.user))  # 👈 ensures user is fetched
+        .filter(models.Reservation.restaurant_id == restaurant_id)
+        .all()
+    )
+    return reservations
 
 
 # ✅ Confirm order

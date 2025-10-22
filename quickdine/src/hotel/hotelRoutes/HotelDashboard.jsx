@@ -92,7 +92,7 @@ function HotelDashboard(){
                 <div key={reservation.id} className="reservation-card">
                   <div className="reservation-info">
                     <div className="reservation-name">
-                      <h3>{reservation.user_id}</h3>
+                      <h3>{reservation.user?.name}</h3>
                       <span
                         className={`status ${getStatusColor(
                           reservation.status
@@ -104,7 +104,7 @@ function HotelDashboard(){
 
                     <div className="reservation-details">
                       <p>
-                        <Mail size={14} /> {reservation.user_id}
+                        <Mail size={14} /> {reservation.user?.email}
                       </p>
                       <p>
                         <Phone size={14} /> 98654525865

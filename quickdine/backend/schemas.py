@@ -1,6 +1,7 @@
 from pydantic import BaseModel
 from datetime import date, datetime, time
 from enum import Enum
+from typing import Optional
 
 
 # ========================
@@ -85,6 +86,13 @@ class ReservationBase(BaseModel):
     restaurant_id: int
     seats_reserved: int
 
+class UserBase(BaseModel):
+    id: int
+    name: str
+    email: str
+
+    class Config:
+        orm_mode = True
 
 class ReservationCreate(BaseModel):
     user_id: int
@@ -102,6 +110,7 @@ class ReservationResponse(ReservationBase):
     schedule_date: date
     schedule_time: str
     status: ReservationStatus
+    user: Optional[UserBase]
 
     class Config:
         orm_mode = True
