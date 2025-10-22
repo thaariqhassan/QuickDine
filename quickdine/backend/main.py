@@ -129,14 +129,27 @@ def confirm_order(order_id: int, db: Session = Depends(get_db)):
     if not order:
         raise HTTPException(status_code=404, detail="Order not found")
 
-    restaurant = db.query(models.Restaurant).filter(models.Restaurant.id == order.restaurant_id).first()
+    """restaurant = db.query(models.Restaurant).filter(models.Restaurant.id == order.restaurant_id).first()
     if restaurant.available_seats < order.seats_reserved:
-        raise HTTPException(status_code=400, detail="Not enough seats available")
+        raise HTTPException(status_code=400, detail="Not enough seats available")"""
 
     order.status = ReservationStatus.confirmed
-    restaurant.available_seats -= order.seats_reserved
+    #restaurant.available_seats -= order.seats_reserved
     db.commit()
     return {"message": "Order confirmed and seats updated"}
+
+# order rejected
+@app.put("/api/orders/{order_id}/reject")
+def confirm_order(order_id: int, db: Session = Depends(get_db)):
+    order = db.query(Reservation).filter(Reservation.id == order_id).first()
+    if not order:
+        raise HTTPException(status_code=404, detail="Order not found")
+
+    order.status = ReservationStatus.cancelled
+    db.commit()
+    db.refresh(order)
+
+    return {"message": "Order confirmed"}
 
 
 # ✅ User’s past orders

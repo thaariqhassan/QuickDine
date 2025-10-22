@@ -18,31 +18,28 @@ function HotelDashboard(){
     }
   };
 
-  const handleStatusChange = (id, newStatus) => {
-    setReservations((prev) =>
-      prev.map((res) =>
-        res.id === id ? { ...res, status: newStatus } : res
-      )
-    );
+  const handleStatusConfirm = async (id, newStatus) => {
+    if (newStatus == "confirmed"){
+      try{
+        await api.put(`http://127.0.0.1:8000/api/orders/${id}/confirm`);
+        console.log("order confirmed");
+      }catch (error) {
+      console.error("Error updating reservation:", error);
+      }
+    }
   };
 
-  const handleStatusConfirm = async (id, newStatus) => {
-  try {
-    // API call — confirm or update reservation
-    await api.put(`/api/orders/${id}/confirm`);
+  const handleStatusReject = async (id, newStatus) => {
+    if (newStatus == "rejected"){
+      try{
+        await api.put(`http://127.0.0.1:8000/api/orders/${id}/reject`);
+        console.log("order rejected");
+      }catch (error) {
+      console.error("Error updating reservation:", error);
+      }
+    }
+  };
 
-    // Update UI state
-    setReservations((prev) =>
-      prev.map((res) =>
-        res.id === id ? { ...res, status: newStatus } : res
-      )
-    );
-
-    console.log(`Reservation ${id} status updated to ${newStatus}`);
-  } catch (error) {
-    console.error("Error updating reservation:", error);
-  }
-};
 
 
   //const restaurantId = localStorage.getItem("user_id");
@@ -140,7 +137,7 @@ function HotelDashboard(){
                       <button
                         className="btn-reject"
                         onClick={() =>
-                          handleStatusChange(reservation.id, "rejected")
+                          handleStatusReject(reservation.id, "rejected")
                         }
                       >
                         <XCircle size={16} /> Reject
@@ -156,4 +153,5 @@ function HotelDashboard(){
     </div>
   );
 }
+
 export default HotelDashboard;
