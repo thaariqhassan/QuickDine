@@ -14,3 +14,34 @@
     justify-content: space-evenly;
     
 }
+
+.logout-btn {
+  background-color: #ad4768; /* Nice pinkish color */
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px; /* space between icon/text if you use an icon */
+}
+
+.logout-btn:hover {
+  background-color: #c85a7d; /* slightly lighter on hover */
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+}
+
+.logout-btn:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+.logout-btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(173, 71, 104, 0.4);
+}
+
