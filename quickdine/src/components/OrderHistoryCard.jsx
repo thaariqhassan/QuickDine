@@ -1,9 +1,31 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "../componentStyles/OrderHistoryCard.css"
 import { CheckCircle } from "lucide-react";
+import api from "../api/axios";
 
 export default function OrderHistoryCard() {
-  const orders = [
+
+  const profile_id = 1;
+  //localStorage.getItem("user_id");
+  const [orders,setOrders] = useState([]);
+
+  useEffect(() => {
+    const fetchOrders = async () => {
+      try {
+        const response = await api.get(
+          `http://127.0.0.1:8000/api/user/${profile_id}/reservation/orders`
+        );
+        setOrders(response.data);
+      } catch (error) {
+        console.error("Error fetching orders:", error);
+      }
+    };
+    fetchOrders();
+  }, [profile_id]);
+
+
+
+  const ordewrs = [
     {
       id: "WU88191111",
       date: "Jul 6, 2021",
@@ -44,48 +66,25 @@ export default function OrderHistoryCard() {
 
         {orders.map((order) => (
           <div key={order.id} className="order-card">
-            <div className="order-header">
-              <div>
-                <p>
-                  <span>Order Number:</span> {order.id}
-                </p>
-                <p>
-                  <span>Date Placed:</span> {order.date}
-                </p>
-                <p>
-                  <span>Total Amount:</span> {order.total}
-                </p>
-              </div>
-              <div className="order-buttons">
-                <button className="outline">View Order</button>
-                <button className="outline">View Invoice</button>
-              </div>
-            </div>
-
-            {order.products.map((product, i) => (
-              <div key={i} className="product-row">
+            
+              <div className="product-row">
                 <div className="product-info">
-                  <img src={product.image} alt={product.name} />
+                  <img src={order.id} alt={order.id} />
                   <div>
-                    <h2>{product.name}</h2>
-                    <p className="desc">{product.description}</p>
-                    <p>number of seats × {product.qty}</p>
-                    <p className="order-id">Order ID: {product.orderId}</p>
+                    <h2>{order.user?.name}</h2>
+                    <p className="desc">{order.user?.name}</p>
+                    <p>number of seats : {order.seats_reserved}</p>
+                    <p className="order-id">Order ID: {order.id}</p>
                     <p className="delivered">
                       <CheckCircle size={14} color="#22c55e" /> Scheduled on{" "}
-                      {product.delivered}
+                      {order.schedule_date} , {order.schedule_time}
                     </p>
                   </div>
                 </div>
                 <div className="product-actions">
-                  <p className="price">{product.price}</p>
-                  <div>
-                    <button className="link">View details</button>
-                    <button className="link">Book Again</button>
-                  </div>
+                  <p className="price">Rs {order.seats_reserved * 100}</p>
                 </div>
               </div>
-            ))}
           </div>
         ))}
       </div>

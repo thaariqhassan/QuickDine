@@ -153,6 +153,16 @@ def confirm_order(order_id: int, db: Session = Depends(get_db)):
 
 
 # ✅ User’s past orders
-@app.get("/api/user/{user_id}/orders", response_model=List[schemas.ReservationResponse])
+@app.get("/api/user/{user_id}/reservation/orders", response_model=List[schemas.UserOrderResponse])
 def get_user_orders(user_id: int, db: Session = Depends(get_db)):
-    return db.query(models.Reservation).filter(models.Reservation.user_id == user_id).all()
+    try:  
+        orders = (
+            db.query(models.Reservation)
+            .options(joinedload(models.Reservation.restaurant))  # eager load restaurant
+            .filter(models.Reservation.user_id == user_id)
+            .all()
+        )
+        return orders
+    except Exception as e:
+        print("ERROR:", e)
+        raise HTTPException(status_code=500, detail=str(e))

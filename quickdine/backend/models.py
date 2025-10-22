@@ -1,7 +1,6 @@
-from sqlalchemy import Column, Integer, String, Boolean, Numeric, ForeignKey, DateTime, Float, Date, Enum, Time
+from sqlalchemy import Column, Integer, String, Boolean, Numeric, ForeignKey, Date, Enum
 from sqlalchemy.orm import relationship
 from database import Base
-from datetime import datetime, timezone
 import enum
 
 
@@ -23,7 +22,6 @@ class User(Base):
 
     # Relationships
     reservations = relationship("Reservation", back_populates="user")
-    orders = relationship("OrderHistory", back_populates="user")
 
 
 class Restaurant(Base):
@@ -67,15 +65,3 @@ class Reservation(Base):
     user = relationship("User", back_populates="reservations")
     restaurant = relationship("Restaurant", back_populates="reservations")
 
-
-class OrderHistory(Base):
-    __tablename__ = "order_history"
-
-    id = Column(Integer, primary_key=True, index=True)
-    user_id = Column(Integer, ForeignKey("users.id"))
-    item_name = Column(String, nullable=False)
-    quantity = Column(Integer, nullable=False)
-    price = Column(Float, nullable=False)
-    placed_at = Column(DateTime, default=datetime.now(timezone.utc))
-
-    user = relationship("User", back_populates="orders")

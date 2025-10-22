@@ -2,6 +2,35 @@ from pydantic import BaseModel
 from datetime import date, datetime, time
 from enum import Enum
 from typing import Optional
+from models import ReservationStatus
+
+
+# ========================
+# ORDER HISTORY
+# ========================
+
+class RestaurantInfo(BaseModel):
+    id: int
+    name: str
+    image: str
+    description: str
+    address: str
+
+    class Config:
+        orm_mode = True
+
+class UserOrderResponse(BaseModel):
+    id: int
+    user_id: int
+    restaurant_id: int
+    seats_reserved: int
+    schedule_date: date
+    schedule_time: str
+    status: ReservationStatus
+    restaurant: Optional[RestaurantInfo]
+
+    class Config:
+        orm_mode = True
 
 
 # ========================
@@ -115,16 +144,3 @@ class ReservationResponse(ReservationBase):
     class Config:
         orm_mode = True
 
-
-# ========================
-# ORDER HISTORY
-# ========================
-class OrderHistoryResponse(BaseModel):
-    id: int
-    item_name: str
-    quantity: int
-    price: float
-    placed_at: datetime
-
-    class Config:
-        orm_mode = True

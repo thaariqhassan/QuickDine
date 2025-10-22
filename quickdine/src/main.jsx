@@ -34,7 +34,7 @@ function Main(){
 
   return(
   <BrowserRouter>
-  {<HotelHeader/>}{/*isRestaurant? <HotelHeader/>:<Header loginClicked={loginClicked} setLoginClicked={setLoginClicked} access={access}/>*/}
+  {/*<HotelHeader/>*/}{isRestaurant? <HotelHeader/>:<Header loginClicked={loginClicked} setLoginClicked={setLoginClicked} access={access}/>}
    <Routes>
       <Route path="/" element={<Home loginClicked={loginClicked} setLoginClicked={setLoginClicked} setAccess={setAccess} setIsRestaurant={setIsRestaurant}/>} />
       <Route path="/restaurants" element={<Restaurants/>}/>
