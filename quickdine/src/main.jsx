@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route, useNavigate} from "react-router";
 import Home from "./routes/Home";
@@ -15,6 +15,20 @@ function Main(){
   const [loginClicked,setLoginClicked] = useState(false);
   const [access, setAccess] = useState(false);
   const [isRestaurant, setIsRestaurant] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem("access_token");
+    const restaurantStatus = localStorage.getItem("is_restaurant");
+
+    if (token) {
+      setAccess(true);
+      setIsRestaurant(restaurantStatus === "true");
+      console.log("✅ Session restored");
+    } else {
+      setAccess(false);
+      //navigate("/login"); // optional redirect if no token
+    }
+  }, []);
 
   // Logout function
   const handleLogout = () => {

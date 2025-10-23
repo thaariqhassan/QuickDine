@@ -6,6 +6,7 @@ import {
 import api from "../../api/axios";
 import "./HotelDashboard.css";
 function HotelDashboard(){
+    const [clicked,setClicked] = useState(false);
     
     const getStatusColor = (status) => {
     switch (status) {
@@ -23,6 +24,7 @@ function HotelDashboard(){
       try{
         await api.put(`http://127.0.0.1:8000/api/orders/${id}/confirm`);
         console.log("order confirmed");
+        setClicked(!clicked);
       }catch (error) {
       console.error("Error updating reservation:", error);
       }
@@ -34,6 +36,7 @@ function HotelDashboard(){
       try{
         await api.put(`http://127.0.0.1:8000/api/orders/${id}/reject`);
         console.log("order rejected");
+        setClicked(!clicked);
       }catch (error) {
       console.error("Error updating reservation:", error);
       }
@@ -42,7 +45,7 @@ function HotelDashboard(){
 
 
 
-  //const restaurantId = localStorage.getItem("user_id");
+  //const restaurantId = localStorage.getItem("restaurant_id");
   const restaurantId = 1;
   const [orders, setOrders] = useState([]);
 
@@ -60,7 +63,7 @@ function HotelDashboard(){
     };
 
     fetchOrders();
-  }, [restaurantId]);
+  }, [clicked]);
 
     return(
     <div className="page hotel-bg">

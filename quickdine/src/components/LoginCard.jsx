@@ -124,6 +124,12 @@ function LoginCard({className, showLoginCard, closeLoginCard, setAccess,setIsRes
           <div>{accountExists ? "Don't have an Account?" : "If you have an account"}</div>
           <div onClick={() => setAccountExists(!accountExists)}>{accountExists ? "Login" : "Sign In"}</div>
           <div onClick={() => navigate("/registerRestaurant")}>{accountExists ? "":"register as a restaurant"}</div>
+          <div onClick={() => {
+            setIsRestaurant(true);
+            closeLoginCard();
+            //localStorage.setItem("user_id",userId);
+            navigate("/dashboard");
+          }}>restaurant dashboard shortcut</div>
         </div>
         
 

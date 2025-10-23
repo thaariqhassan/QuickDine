@@ -30,18 +30,26 @@ export default function PlacingOrder({restaurant_id}) {
       schedule_date : formData.date,
       schedule_time : formData.time
     }
-    const { userId, restaurantId, guests, date, time } = form2;
+    //const { userId, restaurantId, guests, date, time } = form2;
+    console.log(form2);
 
-    await handleReserve(
+    /*await handleReserve(
   1,                      // hardcoded user ID
   1,                      // hardcoded restaurant ID  
   2,                      // hardcoded seats
   "2024-01-15",           // hardcoded date
   "18:30"                 // hardcoded time
-  );
-    //await handleReserve(userId, restaurantId, guests, date, time);
+  );*/
+    await handleReserve(
+  form2.user_id,
+  form2.restaurant_id,
+  form2.seats_reserved,
+  form2.schedule_date,
+  form2.schedule_time
+);
 
-  }
+
+}
 
   const handleReserve = async (userId, restaurantId, seatsReserved, scheduleDate, scheduleTime) => {
   try {
