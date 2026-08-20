@@ -1,6 +1,0 @@
-fastapi
-pydantic
-uvicorn
-sqlalchemy
-sqlalchemy.orm
-bcrypt
